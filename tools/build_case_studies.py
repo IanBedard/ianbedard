@@ -136,9 +136,6 @@ T = dict(
     title_suffix="Étude de cas | Ian Bédard"),
 )
 
-FAVICON = ("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E"
-           "%3Cstop offset='0' stop-color='%2310b981'/%3E%3Cstop offset='1' stop-color='%236d28d9'/%3E%3C/linearGradient%3E%3C/defs%3E"
-           "%3Crect width='32' height='32' rx='9' fill='url(%23g)'/%3E%3Ctext x='16' y='21.5' font-family='Arial' font-size='14' font-weight='800' fill='white' text-anchor='middle'%3EIB%3C/text%3E%3C/svg%3E")
 
 
 def ext(href, label, t, cls="btn btn-outline"):
@@ -251,10 +248,8 @@ def page(i, lang):
   <meta name="theme-color" content="#22102c">
   <link rel="alternate" hreflang="{t['lang']}" href="{p['slug']}.html">
   <link rel="alternate" hreflang="{t['other']}" href="{other_href}">
-  <link rel="icon" href="{FAVICON}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+  <link rel="icon" href="{a}assets/img/logo-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://use.typekit.net/vqa6miq.css">
   <link rel="stylesheet" href="{a}assets/css/style.css">
 </head>
 <body>
@@ -262,7 +257,7 @@ def page(i, lang):
 
   <header class="navbar">
     <div class="container navbar-inner">
-      <a class="logo" href="{t['home']}"><span class="logo-mark" aria-hidden="true">IB</span>Ian Bédard</a>
+      <a class="logo" href="{t['home']}"><img class="logo-mark" src="{a}assets/img/logo-mark.svg" alt="" width="36" height="36">Ian Bédard</a>
       <nav class="site-nav case-nav" aria-label="{t['nav']}">
         <ul>
           <li><a class="lang-switch" href="{other_href}" lang="{t['other']}" hreflang="{t['other']}">{t['other_label']}</a></li>
@@ -327,7 +322,7 @@ def page(i, lang):
     <div class="container">
       <div class="footer-grid">
         <div>
-          <a class="logo" href="{t['home']}"><span class="logo-mark" aria-hidden="true">IB</span>Ian Bédard</a>
+          <a class="logo" href="{t['home']}"><img class="logo-mark" src="{a}assets/img/logo-mark.svg" alt="" width="36" height="36">Ian Bédard</a>
           <p>{t['footer']}</p>
         </div>
         <div>

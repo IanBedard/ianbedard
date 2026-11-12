@@ -42,7 +42,7 @@
   --max: 1180px;
   --gutter: clamp(16px, 4vw, 32px);
 
-  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font: "evert-pe-vf", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;  /* Evert PE via Adobe Fonts (kit vqa6miq) */
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -73,7 +73,7 @@ a:hover { color: var(--pink-dark); }
 h1, h2, h3 { line-height: 1.12; margin: 0 0 .5em; letter-spacing: -.025em; font-weight: 800; }
 h1 { font-size: clamp(2.3rem, 5.4vw, 4rem); }
 h2 { font-size: clamp(1.8rem, 3.6vw, 2.75rem); }
-h2 .thin, h1 .thin { font-weight: 300; }
+h2 .thin, h1 .thin { font-weight: 250; }
 h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -.01em; }
 p { margin: 0 0 1em; }
 
@@ -126,10 +126,7 @@ canvas.waves { position: absolute; inset: 0; width: 100%; height: 100%; z-index:
 .navbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 68px; }
 .logo { display: inline-flex; align-items: center; gap: .6rem; color: #fff; text-decoration: none; font-weight: 800; letter-spacing: -.02em; font-size: 1.1rem; }
 .logo:hover { color: #fff; }
-.logo-mark {
-  display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px;
-  background: linear-gradient(135deg, #f97316, #db2777); color: #fff; font-size: .85rem; font-weight: 800;
-}
+.logo-mark { width: 36px; height: 36px; border-radius: 9px; box-shadow: 0 0 0 1px rgba(255,255,255,.1); }
 .nav-toggle {
   display: none; background: transparent; color: #fff; cursor: pointer;
   border: 1px solid rgba(255,255,255,.25); border-radius: var(--r-sm); padding: .5rem .85rem; font: inherit; font-weight: 600;
@@ -235,8 +232,8 @@ canvas.waves { position: absolute; inset: 0; width: 100%; height: 100%; z-index:
 /* ---------- Hero ---------- */
 .hero { padding: clamp(10rem, 22vw, 15rem) 0; overflow: hidden; text-align: center; }
 .hero-inner { position: relative; max-width: 1040px; }
-.hero h1 { font-size: clamp(2.5rem, 6.4vw, 5rem); font-weight: 300; letter-spacing: -.035em; line-height: 1.06; margin-bottom: .45em; }
-.hero h1 .grad { font-weight: 800; background: var(--sunset-light); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero h1 { font-size: clamp(2.5rem, 6.4vw, 5rem); font-weight: 200; letter-spacing: -.035em; line-height: 1.06; margin-bottom: .45em; }
+.hero h1 .grad { font-weight: 900; background: var(--sunset-light); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero .lead { font-size: clamp(1.08rem, 1.7vw, 1.28rem); color: var(--deep-muted); max-width: 640px; margin: 0 auto 2.25rem; }
 .hero .badges, .hero .btn-row { justify-content: center; }
 .hero .badges { margin-bottom: 1.75rem; }
