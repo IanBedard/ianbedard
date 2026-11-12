@@ -1,6 +1,6 @@
 /* ==========================================================================
    Ian Bédard — site styles
-   Plain CSS, no build step. Sunset palette: deep plum, orange and pink.
+   Plain CSS, no build step. Sunset palette (orange and pink) on near-black, with animated contour waves.
    Colour pairs meet WCAG 2.2 AA contrast.
    ========================================================================== */
 
@@ -12,10 +12,10 @@
   --base-content: #2a1424;
   --muted: #5c4855;            /* 8.4:1 on base-100 */
 
-  /* Deep surfaces (dusk) */
-  --deep: #22102c;
-  --deep-2: #2d1738;
-  --deep-3: #3c2149;
+  /* Deep surfaces (night) */
+  --deep: #0c070e;
+  --deep-2: #1a111d;
+  --deep-3: #2a1d2e;
   --deep-content: #fbeff4;
   --deep-muted: #dccbd9;       /* 10:1 on deep */
 
@@ -73,6 +73,7 @@ a:hover { color: var(--pink-dark); }
 h1, h2, h3 { line-height: 1.12; margin: 0 0 .5em; letter-spacing: -.025em; font-weight: 800; }
 h1 { font-size: clamp(2.3rem, 5.4vw, 4rem); }
 h2 { font-size: clamp(1.8rem, 3.6vw, 2.75rem); }
+h2 .thin, h1 .thin { font-weight: 300; }
 h3 { font-size: 1.15rem; font-weight: 700; letter-spacing: -.01em; }
 p { margin: 0 0 1em; }
 
@@ -99,13 +100,10 @@ section { padding: clamp(4rem, 9vw, 7rem) 0; }
 .deep .muted, .deep p { color: var(--deep-muted); }
 .deep h1, .deep h2, .deep h3 { color: #fff; }
 .deep a:not(.btn) { color: var(--orange-light); }
-.glow::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background:
-    radial-gradient(640px 420px at 88% 0%, rgba(251, 146, 60, .30), transparent 70%),
-    radial-gradient(560px 400px at 0% 100%, rgba(236, 72, 153, .28), transparent 70%),
-    radial-gradient(500px 300px at 50% 120%, rgba(251, 113, 133, .16), transparent 70%);
-}
+/* Contour waves (see assets/js/waves.js); they live in the section's top/bottom padding */
+canvas.waves { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.deep.waves-top { padding-top: clamp(7rem, 15vw, 12rem); }
+.deep.waves-bottom { padding-bottom: clamp(7rem, 15vw, 12rem); }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: .55rem;
@@ -235,32 +233,30 @@ section { padding: clamp(4rem, 9vw, 7rem) 0; }
 .scroll-hint { font-size: .95rem; color: var(--muted); margin: 1rem 0 0; }
 
 /* ---------- Hero ---------- */
-.hero { padding: clamp(3.5rem, 8vw, 6.5rem) 0 clamp(4rem, 8vw, 6rem); overflow: hidden; }
-.hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
-.hero h1 .grad { background: var(--sunset-light); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.hero .lead { font-size: clamp(1.08rem, 1.6vw, 1.22rem); color: var(--deep-muted); max-width: 560px; margin-bottom: 2rem; }
-.hero .badges { margin-bottom: 1.5rem; }
-.hero-visual { position: relative; }
-.hero-visual .mockup-browser { transform: perspective(1600px) rotateY(-6deg) rotateX(2deg); transform-origin: left center; }
-.float-card {
-  position: absolute; display: flex; align-items: center; gap: .7rem;
-  background: rgba(45, 23, 56, .94); border: 1px solid rgba(255,255,255,.14); border-radius: 14px;
-  padding: .7rem .95rem; box-shadow: var(--shadow-lg);
-  font-size: .9rem; color: #fff; font-weight: 650;
+.hero { padding: clamp(10rem, 22vw, 15rem) 0; overflow: hidden; text-align: center; }
+.hero-inner { position: relative; max-width: 1040px; }
+.hero h1 { font-size: clamp(2.5rem, 6.4vw, 5rem); font-weight: 300; letter-spacing: -.035em; line-height: 1.06; margin-bottom: .45em; }
+.hero h1 .grad { font-weight: 800; background: var(--sunset-light); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero .lead { font-size: clamp(1.08rem, 1.7vw, 1.28rem); color: var(--deep-muted); max-width: 640px; margin: 0 auto 2.25rem; }
+.hero .badges, .hero .btn-row { justify-content: center; }
+.hero .badges { margin-bottom: 1.75rem; }
+.hero-meta { margin-top: 1.75rem; font-size: .95rem; color: var(--deep-muted); }
+.hero-meta .dot { display: inline-block; vertical-align: middle; width: 8px; height: 8px; margin: 0 .6rem .15em 0; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 4px rgba(74, 222, 128, .2); }
+
+/* Starburst sticker */
+.sticker {
+  position: absolute; right: -1rem; top: -3.5rem; z-index: 2;
+  display: grid; place-items: center; width: 140px; height: 140px;
+  background: #fff; color: var(--deep); text-decoration: none; text-align: center;
+  font-size: .95rem; font-weight: 800; line-height: 1.1;
+  clip-path: polygon(50% 0%, 61% 12%, 77% 6%, 80% 22%, 96% 25%, 89% 40%, 100% 52%, 88% 62%, 94% 78%, 78% 80%, 74% 96%, 59% 89%, 47% 100%, 38% 88%, 22% 94%, 19% 78%, 3% 74%, 11% 60%, 0% 48%, 12% 38%, 6% 22%, 22% 20%, 26% 4%, 41% 11%);
+  transform: rotate(12deg); transition: transform .35s ease;
 }
-.float-card small { display: block; font-weight: 500; font-size: .78rem; color: var(--deep-muted); }
-.float-card .icon { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: rgba(253, 186, 116, .18); color: var(--orange-light); font-weight: 800; font-size: .8rem; }
-.float-card.one { left: -22px; bottom: 18%; }
-.float-card.two { right: -14px; top: -18px; }
-.float-card.two .icon { background: rgba(249, 168, 212, .18); color: var(--pink-light); }
-.hero-meta { margin-top: 1.75rem; font-size: .95rem; color: var(--deep-muted); display: flex; align-items: center; gap: .6rem; }
-.hero-meta .dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 4px rgba(74, 222, 128, .2); flex: none; }
-@media (max-width: 960px) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .hero-visual { max-width: 640px; }
-  .hero-visual .mockup-browser { transform: none; }
-  .float-card.one { left: 8px; bottom: -22px; }
-  .float-card.two { right: 8px; top: -18px; }
+.sticker:hover, .sticker:focus-visible { transform: rotate(-8deg) scale(1.06); color: var(--deep); }
+.sticker span { display: block; padding: 0 1.4rem; }
+.sticker small { display: block; font-weight: 500; font-size: .78rem; color: var(--pink-dark); margin-top: .2rem; }
+@media (max-width: 900px) {
+  .sticker { position: relative; right: auto; top: auto; margin: 0 auto 1.5rem; width: 116px; height: 116px; font-size: .85rem; }
 }
 
 /* ---------- Highlights ---------- */
@@ -512,3 +508,6 @@ select.input { appearance: none; padding-right: 2.5rem;
 .next-project a { text-decoration: none; }
 .next-project a:hover { text-decoration: underline; }
 .section-tight { padding: clamp(3rem, 6vw, 4.5rem) 0; }
+.deep a.sticker, .deep a.sticker:hover { color: var(--deep); }
+.cta-box { position: relative; isolation: isolate; padding-top: clamp(3.5rem, 7vw, 4.5rem); padding-bottom: clamp(3.5rem, 7vw, 4.5rem); }
+.case-hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); }

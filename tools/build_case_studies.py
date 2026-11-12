@@ -164,7 +164,7 @@ def hero(p, t, c):
     else:
         actions = (f'<a class="btn btn-primary" href="{t["home"]}#contact">{t["demo_btn"]}</a>\n'
                    f'          </div>\n          <p class="demo-pass">{t["demo_p"]}</p>')
-    return f"""    <section class="case-hero deep glow" aria-labelledby="case-title">
+    return f"""    <section class="case-hero deep waves-bottom" data-waves="bottom" aria-labelledby="case-title">
       <div class="container">
         <nav class="breadcrumbs" aria-label="Breadcrumb">
           <a href="{t['home']}">{t['crumbs_home']}</a> / <a href="{t['home']}{t['work_anchor']}">{t['crumbs_work']}</a> / <span aria-current="page">{p['name']}</span>
@@ -254,7 +254,7 @@ def page(i, lang):
   <link rel="icon" href="{FAVICON}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="{a}assets/css/style.css">
 </head>
 <body>
@@ -308,7 +308,7 @@ def page(i, lang):
         <div class="section-head"><h2 id="results-title">{t['results_h']}</h2></div>
         <p class="results-placeholder">{t['results']}</p>
 
-        <div class="cta-box deep glow">
+        <div class="cta-box deep" data-waves="both" data-waves-lines="10">
           <div>
             <h2>{t['cta_h']}</h2>
             <p>{t['cta_p']}</p>
@@ -343,6 +343,7 @@ def page(i, lang):
   </footer>
 
   <script src="{a}assets/js/main.js"></script>
+  <script src="{a}assets/js/waves.js"></script>
 </body>
 </html>
 """

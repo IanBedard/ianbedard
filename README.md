@@ -13,6 +13,7 @@ work/*.html                 English case studies
 fr/realisations/*.html      French case studies
 assets/css/style.css        All styles
 assets/js/main.js           Mobile menu + contact form submit
+assets/js/waves.js          Animated contour waves (add data-waves="top|bottom|both" to a dark section)
 assets/img/                 Project screenshots and mockups
 tools/                      Python scripts that generate the case studies and mockups
 ```
