@@ -230,14 +230,20 @@ canvas.waves { position: absolute; inset: 0; width: 100%; height: 100%; z-index:
 .scroll-hint { font-size: .95rem; color: var(--muted); margin: 1rem 0 0; }
 
 /* ---------- Hero ---------- */
-.hero { padding: clamp(10rem, 22vw, 15rem) 0; overflow: hidden; text-align: center; }
+/* The hero fills exactly one screen below the 68px menu; the waves live in the top/bottom padding, which scales with screen height. */
+.hero {
+  min-height: calc(100vh - 68px); min-height: calc(100svh - 68px);
+  padding: clamp(4.5rem, 17vh, 12rem) 0;
+  display: flex; align-items: center;
+  overflow: hidden; text-align: center;
+}
 .hero-inner { position: relative; max-width: 1040px; }
-.hero h1 { font-size: clamp(2.5rem, 6.4vw, 5rem); font-weight: 200; letter-spacing: 0; line-height: 1.08; margin-bottom: .45em; }
+.hero h1 { font-size: clamp(2.2rem, min(5.6vw, 7.4vh), 4.8rem); font-weight: 200; letter-spacing: 0; line-height: 1.08; margin-bottom: .45em; }
 .hero h1 .grad { font-weight: 900; background: var(--sunset-light); -webkit-background-clip: text; background-clip: text; color: transparent; }
-.hero .lead { font-size: clamp(1.08rem, 1.7vw, 1.28rem); color: var(--deep-muted); max-width: 640px; margin: 0 auto 2.25rem; }
+.hero .lead { font-size: clamp(1.05rem, min(1.7vw, 2.4vh), 1.28rem); color: var(--deep-muted); max-width: 640px; margin: 0 auto clamp(1.25rem, 3.5vh, 2.25rem); }
 .hero .badges, .hero .btn-row { justify-content: center; }
-.hero .badges { margin-bottom: 1.75rem; }
-.hero-meta { margin-top: 1.75rem; font-size: .95rem; color: var(--deep-muted); }
+.hero .badges { margin-bottom: clamp(1rem, 2.6vh, 1.75rem); }
+.hero-meta { margin: clamp(1rem, 2.6vh, 1.75rem) 0 0; font-size: .95rem; color: var(--deep-muted); }
 .hero-meta .dot { display: inline-block; vertical-align: middle; width: 8px; height: 8px; margin: 0 .6rem .15em 0; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 4px rgba(74, 222, 128, .2); }
 
 
@@ -477,3 +483,13 @@ select.input { appearance: none; padding-right: 2.5rem;
 .addons.single .terms ul { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 @media (max-width: 860px) { .addons.single .terms ul { grid-template-columns: 1fr; } }
 .price { margin-bottom: 1.4rem; }
+/* Phones: tighter hero so it fits one screen with both wave ribbons visible */
+@media (max-width: 640px) {
+  .hero { padding: clamp(3.25rem, 10vh, 6rem) 0; }
+  .hero h1 { font-size: clamp(1.75rem, 8.2vw, 2.2rem); }
+  .hero .lead { font-size: .97rem; line-height: 1.55; }
+  .hero .badges { gap: .35rem; }
+  .hero .badge { font-size: .74rem; padding: .35rem .6rem; }
+  .hero .btn { min-height: 44px; padding: .6rem 1.15rem; font-size: .95rem; }
+  .hero-meta { font-size: .86rem; }
+}
