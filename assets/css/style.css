@@ -70,7 +70,7 @@ a:hover { color: var(--pink-dark); }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 6px; }
 .deep :focus-visible, .navbar :focus-visible, .footer :focus-visible { outline-color: #93c5fd; }
 
-h1, h2, h3 { line-height: 1.12; margin: 0 0 .5em; letter-spacing: -.025em; font-weight: 800; }
+h1, h2, h3 { line-height: 1.12; margin: 0 0 .5em; letter-spacing: -.01em; font-weight: 800; }
 h1 { font-size: clamp(2.3rem, 5.4vw, 4rem); }
 h2 { font-size: clamp(1.8rem, 3.6vw, 2.75rem); }
 h2 .thin, h1 .thin { font-weight: 250; }
@@ -232,7 +232,7 @@ canvas.waves { position: absolute; inset: 0; width: 100%; height: 100%; z-index:
 /* ---------- Hero ---------- */
 .hero { padding: clamp(10rem, 22vw, 15rem) 0; overflow: hidden; text-align: center; }
 .hero-inner { position: relative; max-width: 1040px; }
-.hero h1 { font-size: clamp(2.5rem, 6.4vw, 5rem); font-weight: 200; letter-spacing: -.035em; line-height: 1.06; margin-bottom: .45em; }
+.hero h1 { font-size: clamp(2.5rem, 6.4vw, 5rem); font-weight: 200; letter-spacing: 0; line-height: 1.08; margin-bottom: .45em; }
 .hero h1 .grad { font-weight: 900; background: var(--sunset-light); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .hero .lead { font-size: clamp(1.08rem, 1.7vw, 1.28rem); color: var(--deep-muted); max-width: 640px; margin: 0 auto 2.25rem; }
 .hero .badges, .hero .btn-row { justify-content: center; }
@@ -323,7 +323,7 @@ canvas.waves { position: absolute; inset: 0; width: 100%; height: 100%; z-index:
 .price-card h3 small { font-weight: 500; font-size: .9rem; color: var(--muted); }
 .price-card .for { color: var(--muted); font-size: .97rem; margin-bottom: 1.5rem; }
 .price-label { font-size: .85rem; font-weight: 700; color: var(--pink-dark); }
-.price { font-size: 2.4rem; font-weight: 800; letter-spacing: -.035em; line-height: 1.1; margin-top: .2rem; }
+.price { font-size: 2.4rem; font-weight: 800; letter-spacing: -.01em; line-height: 1.1; margin-top: .2rem; }
 .price small { font-size: 1rem; font-weight: 600; color: var(--muted); letter-spacing: 0; }
 .price-regular { color: var(--muted); font-size: .93rem; margin: .4rem 0 1.5rem; }
 .price-regular s { text-decoration-thickness: 1.5px; }
