@@ -4,122 +4,147 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Café Brume: Case study | Ian Bédard</title>
-  <meta name="description" content="A bilingual online shop for a small-batch coffee roaster, with recurring subscriptions and local pickup.">
+  <meta name="description" content="An online coffee shop for a small-batch roaster, built around subscribe-and-save, with a custom theme designed in Figma.">
+  <meta name="theme-color" content="#070b14">
   <link rel="alternate" hreflang="en" href="cafe-brume.html">
   <link rel="alternate" hreflang="fr" href="../fr/realisations/cafe-brume.html">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f5c63'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='17' font-weight='700' fill='white' text-anchor='middle'%3EIB%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2310b981'/%3E%3Cstop offset='1' stop-color='%236d28d9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='url(%23g)'/%3E%3Ctext x='16' y='21.5' font-family='Arial' font-size='14' font-weight='800' fill='white' text-anchor='middle'%3EIB%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="logo" href="../index.html">Ian <span>Bédard</span></a>
-      <nav class="case-nav" aria-label="Main">
-        <a href="../index.html#work">← All projects</a>
-        <a class="lang-switch" href="../fr/realisations/cafe-brume.html" lang="fr" hreflang="fr">Français</a>
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a class="logo" href="../index.html"><span class="logo-mark" aria-hidden="true">IB</span>Ian Bédard</a>
+      <nav class="site-nav case-nav" aria-label="Main">
+        <ul>
+          <li><a class="lang-switch" href="../fr/realisations/cafe-brume.html" lang="fr" hreflang="fr">FR</a></li>
+          <li><a class="nav-cta" href="../index.html#contact">Contact</a></li>
+        </ul>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <section class="case-hero section-alt" aria-labelledby="case-title">
+    <section class="case-hero deep glow grid-lines" aria-labelledby="case-title">
       <div class="container">
-        <div class="tags"><span class="tag">Shopify store</span><span class="tag tag-concept">Concept project</span></div>
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="../index.html">home</a> / <a href="../index.html#work">work</a> / <span aria-current="page">cafe-brume</span>
+        </nav>
+        <div class="badges"><span class="badge">Shopify store</span><span class="badge badge-live">Live demo</span><span class="badge">Concept project</span></div>
         <h1 id="case-title">Café Brume</h1>
-        <p class="lead">A bilingual online shop for a small-batch coffee roaster, with recurring subscriptions and local pickup.</p>
+        <p class="lead">An online coffee shop for a small-batch roaster, built around subscribe-and-save, with a custom theme designed in Figma.</p>
         <dl class="case-meta">
-          <div><dt>Type</dt><dd>Shopify store</dd></div>
-          <div><dt>Business</dt><dd>Coffee roaster, Gatineau</dd></div>
-          <div><dt>Package</dt><dd>Shop Launch + Subscriptions add-on</dd></div>
+          <div><dt>type</dt><dd>Shopify store</dd></div>
+          <div><dt>business</dt><dd>Coffee roaster, Outaouais</dd></div>
+          <div><dt>package</dt><dd>Shop Launch + Subscriptions add-on</dd></div>
         </dl>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://cafe-brume.myshopify.com/" target="_blank" rel="noopener">Open the live store<span class="visually-hidden"> (opens in a new tab)</span></a>
+            <a class="btn btn-outline" href="https://www.figma.com/design/1NcVyYHfctXZY5UNMz49RK" target="_blank" rel="noopener">View the design in Figma<span class="visually-hidden"> (opens in a new tab)</span></a>
+          </div>
+          <p class="demo-pass">Store password: <code>cafebrume</code></p>
       </div>
     </section>
 
-    <section class="case-body">
+    <section class="bg-base-200 section-tight" aria-labelledby="explore-title">
       <div class="container">
-        <div class="case-section">
-          <h2>The goal</h2>
-          <p>Café Brume roasts coffee in small batches and sells it at its café and at weekend markets. It wanted to sell online to customers on both sides of the river, without hiring staff to manage a store.</p>
-          <p>The store had to work equally well in French and English, make subscriptions simple, and stay easy for the owners to update themselves.</p>
+        <div class="section-head">
+          <h2 id="explore-title">Explore the live store</h2>
+          <p>This is the real site, captured from the live demo. Scroll inside the frames to browse it.</p>
         </div>
-
-        <div class="case-section">
-          <h2>What I built</h2>
-          <ul>
-            <li><strong>Bilingual store (FR/EN)</strong> with translated products, checkout, emails and policies</li>
-            <li><strong>Coffee subscriptions</strong>: every 2 or 4 weeks, at 10% off, which customers can pause or skip</li>
-            <li><strong>Accessible checkout</strong>: keyboard-friendly, clear error messages, good colour contrast</li>
-            <li><strong>Local pickup</strong> at the café, plus shipping across Canada with taxes set up for QC and ON</li>
-            <li>Product filters by roast, origin and grind</li>
-            <li>A 1-hour training session so the owners can add new coffees themselves</li>
-          </ul>
+        <div class="showcase">
+          <figure>
+            <div class="mockup-browser"><div class="toolbar"><span class="url">cafe-brume.myshopify.com</span></div><div class="screen scroll" tabindex="0" role="region" aria-label="Café Brume: Desktop, scrollable preview"><img src="../assets/img/cafe-brume/home-full.jpg" alt="" width="2880" loading="lazy"></div></div>
+            <figcaption>Desktop</figcaption>
+          </figure>
+          <figure class="phone-col">
+            <div class="mockup-phone"><div class="screen scroll" tabindex="0" role="region" aria-label="Café Brume: Mobile, scrollable preview"><img src="../assets/img/cafe-brume/home-mobile-full.jpg" alt="" width="780" loading="lazy"></div></div>
+            <figcaption>Mobile</figcaption>
+          </figure>
         </div>
+        <p class="scroll-hint" aria-hidden="true">↕ scroll inside the frame</p>
+      </div>
+    </section>
 
-        <h2>Screenshots</h2>
+    <section class="section-tight">
+      <div class="container">
+        <div class="split">
+          <div class="card"><div class="card-body">
+            <span class="eyebrow">01</span>
+            <h2>The goal</h2>
+              <p>Café Brume roasts seasonal single origins and house blends in small batches every Tuesday. It needed an online store that felt as calm and considered as its coffee, and that turned one-time buyers into regulars.</p>
+              <p>The store had to make subscriptions effortless, help new customers pick the right roast, and be usable by everyone, on any device.</p>
+          </div></div>
+          <div class="card"><div class="card-body">
+            <span class="eyebrow">02</span>
+            <h2>What I built</h2>
+            <ul class="feature-list">
+                <li><span><b>Subscribe and save 10%</b>, delivered every 2, 3 or 4 weeks, with free shipping. Customers can pause, skip or cancel from their account</span></li>
+                <li><span><b>Product pages</b> with tasting notes, origin and process, size and grind options, and a subscribe-or-buy-once choice</span></li>
+                <li><span><b>“Find your roast”</b> paths (light, medium, dark, decaf) for customers who aren’t sure where to start</span></li>
+                <li><span><b>Brew guides</b> for pour-over, French press and moka pot</span></li>
+                <li><span><b>Accessibility</b>: built to WCAG 2.2 AA, with an accessibility statement and a way to ask for help</span></li>
+                <li><span><b>Bilingual touches</b> in the announcement bar and section labels (FR/EN)</span></li>
+                <li><span><b>Custom theme</b> designed in Figma, then built in Shopify</span></li>
+            </ul>
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-base-200 section-tight" aria-labelledby="details-title">
+      <div class="container">
+        <div class="section-head"><h2 id="details-title">Details</h2></div>
         <div class="shots">
-          <figure>
-            <img src="../assets/img/cafe-brume-desktop.svg" alt="" width="1200" height="760">
-            <figcaption>Desktop view</figcaption>
-          </figure>
-          <figure>
-            <img src="../assets/img/cafe-brume-mobile.svg" alt="" width="390" height="800">
-            <figcaption>Mobile view</figcaption>
-          </figure>
+          <figure><div class="mockup-browser"><div class="toolbar"><span class="url">cafe-brume.myshopify.com</span></div><div class="screen"><img src="../assets/img/cafe-brume/product-desktop.jpg" alt="" width="2880" height="1800" loading="lazy"></div></div><figcaption>Product page: tasting notes, size and grind, and subscribe-and-save</figcaption></figure>
+          <figure><div class="mockup-browser"><div class="toolbar"><span class="url">cafe-brume.myshopify.com</span></div><div class="screen"><img src="../assets/img/cafe-brume/subscriptions-desktop.jpg" alt="" width="2880" height="1800" loading="lazy"></div></div><figcaption>Subscriptions page: three simple steps</figcaption></figure>
+          <figure><div class="mockup-browser"><div class="toolbar"><span class="url">cafe-brume.myshopify.com</span></div><div class="screen"><img src="../assets/img/cafe-brume/collection-desktop.jpg" alt="" width="2880" height="1800" loading="lazy"></div></div><figcaption>Collection page with roast filters</figcaption></figure>
         </div>
+      </div>
+    </section>
 
-        <h3>Details</h3>
-        <div class="details">
-          <figure>
-            <div class="zoom"><img src="../assets/img/cafe-brume-desktop.svg" alt="" style="left:-195.0%;top:-10.0%" loading="lazy"></div>
-            <figcaption>Navigation with an EN/FR language toggle and cart</figcaption>
-          </figure>
-          <figure>
-            <div class="zoom"><img src="../assets/img/cafe-brume-desktop.svg" alt="" style="left:-7.5%;top:-50.0%" loading="lazy"></div>
-            <figcaption>Clear headline with subscription offer and a large, high-contrast button</figcaption>
-          </figure>
-          <figure>
-            <div class="zoom"><img src="../assets/img/cafe-brume-desktop.svg" alt="" style="left:-10.0%;top:-153.3%" loading="lazy"></div>
-            <figcaption>Product cards with readable prices</figcaption>
-          </figure>
-        </div>
+    <section class="section-tight" aria-labelledby="results-title">
+      <div class="container">
+        <div class="section-head"><h2 id="results-title">Results</h2></div>
+        <p class="results-placeholder">This is a concept project, so there are no client results yet. When I work with real clients, this section will include their testimonial and measurable results, such as more online orders or bookings.</p>
 
-        <div class="case-section">
-          <h2>Results</h2>
-          <p class="results-placeholder">This is a concept project, so there are no client results yet. When I work with real clients, this section will include their testimonial and measurable results, such as more online orders or bookings.</p>
-        </div>
-
-        <div class="demo-box">
+        <div class="cta-box deep glow">
           <div>
-            <h2>See the live demo</h2>
-            <p>Store password: <code>cafebrume</code></p>
+            <h2>Want a store like this?</h2>
+            <p>Founding-client pricing is open now. I reply within 1 business day.</p>
           </div>
           <div class="btn-row">
-            <a class="btn btn-secondary" href="https://cafe-brume.myshopify.com/" target="_blank" rel="noopener">Open the live store<span class="visually-hidden"> (opens in a new tab)</span></a>
-            <a class="btn btn-secondary" href="https://www.figma.com/design/1NcVyYHfctXZY5UNMz49RK" target="_blank" rel="noopener">View the design in Figma<span class="visually-hidden"> (opens in a new tab)</span></a>
             <a class="btn btn-primary" href="../index.html#contact">Start a project like this</a>
+            <a class="btn btn-outline" href="https://cafe-brume.myshopify.com/" target="_blank" rel="noopener">Open the live store<span class="visually-hidden"> (opens in a new tab)</span></a>
           </div>
         </div>
 
-        <p class="next-project">Next project: <a href="atelier-argile.html">Atelier Argile →</a></p>
+        <p class="next-project"><a href="atelier-argile.html">Next project: Atelier Argile →</a></p>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="footer-brand">Ian Bédard</div>
-          <p>Bilingual, accessible websites and Shopify stores for small businesses in Ottawa–Gatineau.</p>
+          <a class="logo" href="../index.html"><span class="logo-mark" aria-hidden="true">IB</span>Ian Bédard</a>
+          <p>Bilingual, accessible websites and Shopify stores<br>for small businesses in Ottawa–Gatineau.</p>
         </div>
-        <ul aria-label="Contact">
-          <li><a href="mailto:YOUR-EMAIL@example.com">YOUR-EMAIL@example.com</a></li>
-          <li><a href="https://www.linkedin.com/in/YOUR-LINKEDIN/" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
-        </ul>
+        <div>
+          <div class="footer-title">contact</div>
+          <ul>
+            <li><a href="mailto:ian.bedard@hotmail.com">ian.bedard@hotmail.com</a></li>
+            <li><a href="https://www.linkedin.com/in/ianbedard/" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (opens in a new tab)</span></a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-bottom">© <span id="year">2026</span> Ian Bédard. Ottawa–Gatineau.</div>
+      <div class="footer-bottom"><span>© <span id="year">2026</span> Ian Bédard</span><span>Ottawa–Gatineau</span></div>
     </div>
   </footer>
 

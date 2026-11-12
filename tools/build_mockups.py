@@ -89,7 +89,8 @@ def text(x, y, s, size, fill, weight=400, family=FONT, anchor="start"):
 
 def desktop(p):
     W, H = 1200, 760
-    o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img">',
+    # The viewBox crops off the drawn browser bar; the site's CSS frame (.mockup-browser) supplies it.
+    o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 44 {W} {H-44}" width="{W}" height="{H-44}" role="img">',
          f'<rect width="{W}" height="{H}" fill="#fff"/>',
          # browser chrome
          f'<rect width="{W}" height="44" fill="#e9e9ec"/>',
@@ -132,13 +133,11 @@ def desktop(p):
 
 def mobile(p):
     W, H = 390, 800
-    o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img">',
-         f'<rect width="{W}" height="{H}" rx="44" fill="#1b1b1f"/>',
-         f'<clipPath id="s"><rect x="12" y="12" width="{W-24}" height="{H-24}" rx="34"/></clipPath>',
-         '<g clip-path="url(#s)">',
+    # The viewBox crops off the drawn phone bezel; the site's CSS frame (.mockup-phone) supplies it.
+    o = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="12 12 {W-24} {H-24}" width="{W-24}" height="{H-24}" role="img">',
+         '<g>',
          f'<rect x="12" y="12" width="{W-24}" height="{H-24}" fill="#fff"/>',
          text(44, 44, "9:41", 14, "#111", 600),
-         f'<rect x="150" y="26" width="90" height="24" rx="12" fill="#1b1b1f"/>',
          text(32, 98, p["logo"], 21, p["dark"], 700, SERIF),
          f'<rect x="278" y="80" width="38" height="24" rx="12" fill="none" stroke="{p["dark"]}" stroke-opacity=".3"/>',
          text(297, 97, "FR", 11, p["dark"], 700, anchor="middle"),
@@ -163,6 +162,8 @@ def mobile(p):
 
 
 for slug, p in projects.items():
+    if slug == "cafe-brume":  # uses real screenshots of the live store instead
+        continue
     with open(os.path.join(OUT, f"{slug}-desktop.svg"), "w", encoding="utf-8") as f:
         f.write(desktop(p))
     with open(os.path.join(OUT, f"{slug}-mobile.svg"), "w", encoding="utf-8") as f:

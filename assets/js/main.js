@@ -12,7 +12,7 @@
       nav.classList.toggle("is-open", !open);
     });
     nav.addEventListener("click", function (e) {
-      if (e.target.closest("a") && window.matchMedia("(max-width: 860px)").matches) {
+      if (e.target.closest("a") && window.matchMedia("(max-width: 900px)").matches) {
         toggle.setAttribute("aria-expanded", "false");
         nav.classList.remove("is-open");
       }

@@ -5,17 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ian Bédard | Sites Web et boutiques Shopify bilingues et accessibles à Ottawa–Gatineau</title>
   <meta name="description" content="Sites Web et boutiques Shopify bilingues (FR/EN) et accessibles pour les petites entreprises d’Ottawa–Gatineau. Plus de 5 ans à bâtir des sites du gouvernement du Canada.">
+  <meta name="theme-color" content="#070b14">
   <link rel="alternate" hreflang="en" href="../index.html">
   <link rel="alternate" hreflang="fr" href="index.html">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230f5c63'/%3E%3Ctext x='16' y='22' font-family='Georgia' font-size='17' font-weight='700' fill='white' text-anchor='middle'%3EIB%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2310b981'/%3E%3Cstop offset='1' stop-color='%236d28d9'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='9' fill='url(%23g)'/%3E%3Ctext x='16' y='21.5' font-family='Arial' font-size='14' font-weight='800' fill='white' text-anchor='middle'%3EIB%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap">
   <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Passer au contenu principal</a>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="logo" href="index.html">Ian <span>Bédard</span></a>
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true">IB</span>Ian Bédard</a>
       <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
       <nav id="site-nav" class="site-nav" aria-label="Principal">
         <ul>
@@ -23,8 +27,8 @@
           <li><a href="#tarifs">Tarifs</a></li>
           <li><a href="#processus">Fonctionnement</a></li>
           <li><a href="#faq">FAQ</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a class="lang-switch" href="../index.html" lang="en" hreflang="en">English</a></li>
+          <li><a class="lang-switch" href="../index.html" lang="en" hreflang="en">EN</a></li>
+          <li><a class="nav-cta" href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -32,84 +36,117 @@
 
   <main id="main">
     <!-- Hero -->
-    <section class="hero" aria-labelledby="hero-title">
+    <section class="hero deep glow grid-lines" aria-labelledby="hero-title">
       <div class="container hero-grid">
         <div>
-          <span class="eyebrow">Développeur Web · Ottawa–Gatineau</span>
-          <h1 id="hero-title">Des sites Web et des boutiques Shopify bilingues et accessibles pour les petites entreprises d’Ottawa–Gatineau.</h1>
+          <div class="badges">
+            <span class="badge">Ottawa–Gatineau</span>
+            <span class="badge">FR / EN</span>
+            <span class="badge">WCAG 2.2 AA</span>
+          </div>
+          <h1 id="hero-title">Des sites Web et des <span class="grad">boutiques Shopify</span> bilingues et accessibles pour les petites entreprises d’Ottawa–Gatineau.</h1>
           <p class="lead">Je crée des sites rapides et professionnels, en français et en anglais, que tous vos clients peuvent utiliser. Vous gardez votre temps pour votre entreprise.</p>
           <div class="btn-row">
             <a class="btn btn-primary" href="#realisations">Voir mes réalisations</a>
-            <a class="btn btn-secondary" href="https://cal.com/YOUR-USERNAME/15min" target="_blank" rel="noopener">Réserver un appel gratuit<span class="visually-hidden"> (s’ouvre dans un nouvel onglet)</span></a>
+            <a class="btn btn-outline" href="https://cal.com/YOUR-USERNAME/15min" target="_blank" rel="noopener">Réserver un appel gratuit<span class="visually-hidden"> (s’ouvre dans un nouvel onglet)</span></a>
           </div>
+          <p class="hero-meta"><span class="dot" aria-hidden="true"></span><span>Je réponds en moins d’un jour ouvrable, en français ou en anglais.</span></p>
         </div>
-        <aside class="hero-card" aria-label="En bref">
-          <h2>Ce que vous obtenez</h2>
-          <ul>
-            <li><span class="badge-dot" aria-hidden="true">✓</span><span>Un site en français <strong>et</strong> en anglais, dès le premier jour</span></li>
-            <li><span class="badge-dot" aria-hidden="true">✓</span><span>L’accessibilité (WCAG) intégrée dès le départ</span></li>
-            <li><span class="badge-dot" aria-hidden="true">✓</span><span>Des prix clairs et fixes, sans surprise</span></li>
-            <li><span class="badge-dot" aria-hidden="true">✓</span><span>Un seul interlocuteur, du premier appel au lancement : moi</span></li>
-          </ul>
-          <p class="hero-note">Je réponds en moins d’un jour ouvrable, en français ou en anglais.</p>
-        </aside>
+
+        <div class="hero-visual">
+          <div class="mockup-browser dark">
+            <div class="toolbar"><span class="url">cafe-brume.myshopify.com</span></div>
+            <div class="screen"><img src="../assets/img/cafe-brume/home-desktop.jpg" alt="Page d’accueil de la boutique en ligne Café Brume, avec le titre « Coffee for slow, misty mornings. »" width="2880" height="1800"></div>
+          </div>
+          <div class="float-card two" aria-hidden="true"><span class="icon">FR</span><span>Bilingue<small>FR / EN</small></span></div>
+          <div class="float-card one" aria-hidden="true"><span class="icon">AA</span><span>Accessible<small>WCAG 2.2</small></span></div>
+        </div>
       </div>
     </section>
 
     <!-- Pourquoi -->
-    <section class="section-alt" id="pourquoi" aria-labelledby="why-title">
+    <section id="pourquoi" aria-labelledby="why-title">
       <div class="container">
-        <span class="eyebrow">Pourquoi travailler avec moi</span>
-        <h2 id="why-title">La qualité du gouvernement, au prix d’une petite entreprise</h2>
-        <div class="why-grid">
-          <div class="why-item">
-            <div class="num" aria-hidden="true">5+</div>
-            <h3>Années de sites fédéraux</h3>
+        <div class="section-head">
+          <span class="eyebrow">pourquoi_moi</span>
+          <h2 id="why-title">La qualité du gouvernement, au prix d’une petite entreprise</h2>
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-title">expérience</div>
+            <div class="stat-value">5+ ans</div>
+            <h3>À bâtir des sites fédéraux</h3>
             <p>Depuis plus de cinq ans, je bâtis des sites Web du gouvernement du Canada, où la qualité, la sécurité et la clarté sont essentielles.</p>
           </div>
-          <div class="why-item">
-            <div class="num" aria-hidden="true">FR/EN</div>
+          <div class="stat">
+            <div class="stat-title">langues</div>
+            <div class="stat-value">FR + EN</div>
             <h3>Bilingue, d’office</h3>
             <p>Chaque site fonctionne en français et en anglais, et la traduction n’est pas faite à la dernière minute. Rejoignez toute la région.</p>
           </div>
-          <div class="why-item">
-            <div class="num" aria-hidden="true">AA</div>
-            <h3>Accessibilité WCAG intégrée</h3>
-            <p>Votre site fonctionne au clavier, avec un lecteur d’écran et sur tous les appareils. Plus de clients peuvent acheter chez vous, et vous respectez les normes d’accessibilité.</p>
+          <div class="stat">
+            <div class="stat-title">accessibilité</div>
+            <div class="stat-value">WCAG AA</div>
+            <h3>Intégrée dès le départ</h3>
+            <p>Votre site fonctionne au clavier, avec un lecteur d’écran et sur tous les appareils. Plus de clients peuvent acheter chez vous.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Réalisations -->
-    <section id="realisations" aria-labelledby="work-title">
+    <section class="bg-base-200" id="realisations" aria-labelledby="work-title">
       <div class="container">
-        <span class="eyebrow">Réalisations</span>
-        <h2 id="work-title">Projets récents</h2>
-        <p class="section-intro">Ce sont des projets conceptuels : des sites complets et fonctionnels, créés pour montrer ce que je peux faire pour une entreprise comme la vôtre.</p>
+        <div class="section-head">
+          <span class="eyebrow">réalisations</span>
+          <h2 id="work-title">Projets récents</h2>
+          <p>Des projets conceptuels : des sites complets et fonctionnels, créés pour montrer ce que je peux faire pour une entreprise comme la vôtre.</p>
+        </div>
         <div class="work-grid">
-          <article class="work-card">
-            <img src="../assets/img/cafe-brume-desktop.svg" alt="" width="1200" height="760" loading="lazy">
-            <div class="body">
-              <div class="tags"><span class="tag">Boutique Shopify</span><span class="tag tag-concept">Projet conceptuel</span></div>
+          <article class="card work-card featured">
+            <div class="preview">
+              <div class="mockup-browser">
+                <div class="toolbar"><span class="url">cafe-brume.myshopify.com</span></div>
+                <div class="screen"><img src="../assets/img/cafe-brume/home-desktop.jpg" alt="" width="2880" height="1800" loading="lazy"></div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="badges"><span class="badge badge-primary">Boutique Shopify</span><span class="badge badge-live">Démo en ligne</span><span class="badge badge-warning">Projet conceptuel</span></div>
               <h3><a href="realisations/cafe-brume.html">Café Brume</a></h3>
-              <p>Une boutique en ligne bilingue pour un torréfacteur de Gatineau, avec abonnements au café et cueillette sur place.</p>
+              <p>Une boutique de café en ligne pour un torréfacteur artisanal de l’Outaouais, avec abonnements à rabais, outil pour trouver sa torréfaction et guides d’infusion.</p>
+              <ul class="feature-list">
+                <li>Abonnements aux 2, 3 ou 4 semaines</li>
+                <li>Conforme aux WCAG 2.2 AA</li>
+                <li>Thème sur mesure conçu dans Figma</li>
+              </ul>
               <span class="more" aria-hidden="true">Voir l’étude de cas →</span>
             </div>
           </article>
-          <article class="work-card">
-            <img src="../assets/img/atelier-argile-desktop.svg" alt="" width="1200" height="760" loading="lazy">
-            <div class="body">
-              <div class="tags"><span class="tag">Boutique Shopify</span><span class="tag tag-concept">Projet conceptuel</span></div>
+
+          <article class="card work-card">
+            <div class="preview">
+              <div class="mockup-browser">
+                <div class="toolbar"><span class="url">atelierargile.ca</span></div>
+                <div class="screen"><img src="../assets/img/atelier-argile-desktop.svg" alt="" width="1200" height="716" loading="lazy"></div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="badges"><span class="badge badge-primary">Boutique Shopify</span><span class="badge badge-warning">Projet conceptuel</span></div>
               <h3><a href="realisations/atelier-argile.html">Atelier Argile</a></h3>
               <p>Un atelier de céramique qui vend des pièces faites à la main et des cours de tournage en ligne.</p>
               <span class="more" aria-hidden="true">Voir l’étude de cas →</span>
             </div>
           </article>
-          <article class="work-card">
-            <img src="../assets/img/physio-riviere-desktop.svg" alt="" width="1200" height="760" loading="lazy">
-            <div class="body">
-              <div class="tags"><span class="tag">Site vitrine</span><span class="tag tag-concept">Projet conceptuel</span></div>
+
+          <article class="card work-card">
+            <div class="preview">
+              <div class="mockup-browser">
+                <div class="toolbar"><span class="url">physioriviere.ca</span></div>
+                <div class="screen"><img src="../assets/img/physio-riviere-desktop.svg" alt="" width="1200" height="716" loading="lazy"></div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="badges"><span class="badge badge-secondary">Site vitrine</span><span class="badge badge-warning">Projet conceptuel</span></div>
               <h3><a href="realisations/physio-riviere.html">Physio Rivière</a></h3>
               <p>Un site clair et accessible pour une clinique de physiothérapie d’Ottawa, avec réservation en ligne et profil d’entreprise Google.</p>
               <span class="more" aria-hidden="true">Voir l’étude de cas →</span>
@@ -120,18 +157,20 @@
     </section>
 
     <!-- Tarifs -->
-    <section class="section-alt" id="tarifs" aria-labelledby="pricing-title">
+    <section id="tarifs" aria-labelledby="pricing-title">
       <div class="container">
-        <span class="eyebrow">Forfaits et tarifs</span>
-        <h2 id="pricing-title">Des forfaits simples, des prix clairs</h2>
-        <p class="section-intro">Tous les prix sont en dollars canadiens. Les prix « premiers clients » sont offerts à mes premiers clients, en échange de commentaires honnêtes et d’un témoignage.</p>
+        <div class="section-head">
+          <span class="eyebrow">tarifs</span>
+          <h2 id="pricing-title">Des forfaits simples, des prix clairs</h2>
+          <p>Tous les prix sont en dollars canadiens. Les prix « premiers clients » sont offerts à mes premiers clients, en échange de commentaires honnêtes et d’un témoignage.</p>
+        </div>
 
         <div class="price-grid">
-          <article class="price-card">
+          <article class="card price-card">
             <h3>Site vitrine</h3>
             <p class="for">Pour les entreprises de services qui veulent une présence en ligne professionnelle.</p>
-            <span class="price-label">Prix premiers clients</span>
-            <div class="price-founding">2 250 $ – 2 500 $</div>
+            <span class="price-label">prix premiers clients</span>
+            <div class="price">2 250 $ – 2 500 $</div>
             <p class="price-regular">Prix régulier : <s>3 000 $</s></p>
             <ul>
               <li>7 à 10 pages</li>
@@ -142,15 +181,15 @@
               <li>Configuration du profil d’entreprise Google</li>
               <li>2 séries de révisions</li>
             </ul>
-            <a class="btn btn-secondary" href="#contact" data-package="Brand Site">Démarrer un site vitrine</a>
+            <a class="btn btn-outline btn-block" href="#contact" data-package="Brand Site">Démarrer un site vitrine</a>
           </article>
 
-          <article class="price-card featured">
-            <span class="price-ribbon">Le plus populaire</span>
-            <h3>Lancement de boutique <small>(Shopify)</small></h3>
+          <article class="card price-card featured deep">
+            <span class="badge">★ Le plus populaire</span>
+            <h3>Lancement de boutique <small>Shopify</small></h3>
             <p class="for">Pour les entreprises prêtes à vendre en ligne.</p>
-            <span class="price-label">Prix premiers clients</span>
-            <div class="price-founding">2 500 $ – 3 500 $</div>
+            <span class="price-label">prix premiers clients</span>
+            <div class="price">2 500 $ – 3 500 $</div>
             <p class="price-regular">Prix régulier : <s>3 500 $ – 4 500 $</s></p>
             <ul>
               <li>Configuration de la boutique Shopify</li>
@@ -161,14 +200,14 @@
               <li>Séance de formation</li>
               <li>2 séries de révisions</li>
             </ul>
-            <a class="btn btn-primary" href="#contact" data-package="Shop Launch">Lancer ma boutique</a>
+            <a class="btn btn-primary btn-block" href="#contact" data-package="Shop Launch">Lancer ma boutique</a>
           </article>
 
-          <article class="price-card">
-            <h3>Plan d’entretien <small>(mensuel)</small></h3>
+          <article class="card price-card">
+            <h3>Plan d’entretien <small>mensuel</small></h3>
             <p class="for">Pour avoir l’esprit tranquille après le lancement.</p>
-            <span class="price-label">Prix premiers clients</span>
-            <div class="price-founding">75 $<small>/mois</small></div>
+            <span class="price-label">prix premiers clients</span>
+            <div class="price">75 $<small>/mois</small></div>
             <p class="price-regular">Prix régulier : <s>100 $ – 150 $/mois</s></p>
             <ul>
               <li>Mises à jour et sauvegardes</li>
@@ -176,31 +215,33 @@
               <li>Vérification mensuelle de la performance</li>
               <li>Vérification mensuelle de l’accessibilité</li>
             </ul>
-            <a class="btn btn-secondary" href="#contact" data-package="Not sure">Demander le plan d’entretien</a>
+            <a class="btn btn-outline btn-block" href="#contact" data-package="Not sure">Demander le plan d’entretien</a>
           </article>
         </div>
 
         <div class="addons">
-          <table class="addon-table">
-            <caption>Options</caption>
-            <thead><tr><th scope="col">Option</th><th scope="col">Prix</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">Page supplémentaire</th><td>150 $ – 200 $ chacune</td></tr>
-              <tr><th scope="row">Produits supplémentaires (par 25)</th><td>150 $</td></tr>
-              <tr><th scope="row">Rédaction (j’écris les textes)</th><td>100 $/page</td></tr>
-              <tr><th scope="row">Logo de base et palette de couleurs</th><td>400 $</td></tr>
-              <tr><th scope="row">Audit d’accessibilité d’un site existant</th><td>450 $</td></tr>
-              <tr><th scope="row">Configuration des abonnements (Shopify)</th><td>250 $</td></tr>
-              <tr><th scope="row">Livraison express (moins de 2 semaines)</th><td>+20 %</td></tr>
-              <tr><th scope="row">Site sur mesure (React/Next.js)</th><td>À partir de 6 000 $</td></tr>
-            </tbody>
-          </table>
-          <div class="terms">
+          <div class="table-wrap">
+            <h3 id="addons-title">Options</h3>
+            <table class="table" aria-labelledby="addons-title">
+              <thead><tr><th scope="col">Option</th><th scope="col">Prix</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Page supplémentaire</th><td>150 $ – 200 $ chacune</td></tr>
+                <tr><th scope="row">Produits supplémentaires (par 25)</th><td>150 $</td></tr>
+                <tr><th scope="row">Rédaction (j’écris les textes)</th><td>100 $/page</td></tr>
+                <tr><th scope="row">Logo de base et palette de couleurs</th><td>400 $</td></tr>
+                <tr><th scope="row">Audit d’accessibilité d’un site existant</th><td>450 $</td></tr>
+                <tr><th scope="row">Configuration des abonnements (Shopify)</th><td>250 $</td></tr>
+                <tr><th scope="row">Livraison express (moins de 2 semaines)</th><td>+20 %</td></tr>
+                <tr><th scope="row">Site sur mesure (React/Next.js)</th><td>À partir de 6 000 $</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card terms">
             <h3>Modalités de paiement</h3>
             <ul>
-              <li><strong>Dépôt de 50 %</strong> pour commencer, <strong>50 % au lancement</strong>.</li>
-              <li>Pour les projets de plus de 4 000 $ : <strong>40 / 30 / 30</strong>.</li>
-              <li>Vous payez directement votre forfait Shopify, votre nom de domaine et vos applications payantes. Ils vous appartiennent.</li>
+              <li><span class="kbd">50/50</span><span><b>Dépôt de 50 %</b> pour commencer, <b>50 % au lancement</b>.</span></li>
+              <li><span class="kbd">40/30/30</span><span>Pour les projets de plus de <b>4 000 $</b>.</span></li>
+              <li><span class="kbd">$</span><span>Vous payez directement votre forfait Shopify, votre domaine et vos applications payantes : <b>ils vous appartiennent</b>.</span></li>
             </ul>
           </div>
         </div>
@@ -208,11 +249,13 @@
     </section>
 
     <!-- Processus -->
-    <section id="processus" aria-labelledby="process-title">
+    <section class="deep glow" id="processus" aria-labelledby="process-title">
       <div class="container">
-        <span class="eyebrow">Fonctionnement</span>
-        <h2 id="process-title">Cinq étapes, de l’idée au lancement</h2>
-        <p class="section-intro">Vous savez toujours ce qui s’en vient et ce dont j’ai besoin de votre part.</p>
+        <div class="section-head">
+          <span class="eyebrow">fonctionnement</span>
+          <h2 id="process-title">Cinq étapes, de l’idée au lancement</h2>
+          <p>Vous savez toujours ce qui s’en vient et ce dont j’ai besoin de votre part.</p>
+        </div>
         <ol class="steps">
           <li><h3>Appel</h3><p>Un appel gratuit de 15 minutes pour comprendre votre entreprise et vos objectifs.</p></li>
           <li><h3>Proposition</h3><p>Une proposition claire : portée, échéancier et prix fixe.</p></li>
@@ -224,32 +267,34 @@
     </section>
 
     <!-- FAQ -->
-    <section class="section-alt" id="faq" aria-labelledby="faq-title">
+    <section class="bg-base-200" id="faq" aria-labelledby="faq-title">
       <div class="container">
-        <span class="eyebrow">FAQ</span>
-        <h2 id="faq-title">Questions fréquentes</h2>
+        <div class="section-head">
+          <span class="eyebrow">faq</span>
+          <h2 id="faq-title">Questions fréquentes</h2>
+        </div>
         <div class="faq">
-          <details>
+          <details class="collapse">
             <summary>Combien de temps dure un projet?</summary>
             <div><p>Un site vitrine prend habituellement de 3 à 4 semaines, et un lancement de boutique de 4 à 6 semaines, selon la rapidité à laquelle j’obtiens le contenu et vos commentaires. C’est pressé? La livraison express (moins de 2 semaines) est offerte pour +20 %.</p></div>
           </details>
-          <details>
+          <details class="collapse">
             <summary>Comment fonctionnent les paiements?</summary>
             <div><p>Un dépôt de 50 % réserve votre place et lance le projet, et les 50 % restants sont payables au lancement. Pour les projets de plus de 4 000 $, c’est 40 % au départ, 30 % à l’étape de conception et 30 % au lancement.</p></div>
           </details>
-          <details>
+          <details class="collapse">
             <summary>Qui paie Shopify, le nom de domaine et les applications?</summary>
             <div><p>Vous, directement. Votre forfait Shopify, votre nom de domaine et vos applications payantes sont à votre nom et sur votre carte : votre boutique et votre site vous appartiennent entièrement. Je vous aide à choisir le bon forfait et à tout configurer.</p></div>
           </details>
-          <details>
+          <details class="collapse">
             <summary>Combien de révisions sont incluses?</summary>
             <div><p>Le site vitrine et le lancement de boutique incluent 2 séries de révisions. Les séries supplémentaires et les nouvelles fonctionnalités sont estimées à l’avance, donc jamais de facture surprise.</p></div>
           </details>
-          <details>
+          <details class="collapse">
             <summary>Dois-je écrire le contenu dans les deux langues?</summary>
             <div><p>Vous pouvez fournir les textes dans une seule langue ou dans les deux. Je peux aussi les rédiger pour vous avec l’option Rédaction (100 $/page).</p></div>
           </details>
-          <details>
+          <details class="collapse">
             <summary>Que veut dire « accessible » pour mon site?</summary>
             <div><p>Votre site respecte les Règles pour l’accessibilité des contenus Web (WCAG 2.2 AA). Les personnes qui utilisent un lecteur d’écran, le clavier, un agrandisseur ou un vieil appareil peuvent quand même lire votre contenu et acheter chez vous.</p></div>
           </details>
@@ -258,60 +303,64 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" aria-labelledby="contact-title">
+    <section class="deep glow grid-lines" id="contact" aria-labelledby="contact-title">
       <div class="container">
-        <span class="eyebrow">Contact</span>
-        <h2 id="contact-title">Parlons de votre projet</h2>
-        <p class="section-intro">Parlez-moi un peu de votre entreprise, ou réservez un appel gratuit de 15 minutes. Aucune pression, aucun jargon.</p>
+        <div class="section-head">
+          <span class="eyebrow">contact</span>
+          <h2 id="contact-title">Parlons de votre projet</h2>
+          <p>Parlez-moi un peu de votre entreprise, ou réservez un appel gratuit de 15 minutes. Aucune pression, aucun jargon.</p>
+        </div>
         <div class="contact-grid">
-          <form id="contact-form" class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-            <div class="field">
-              <label for="name">Nom</label>
-              <input id="name" name="name" type="text" autocomplete="name" required>
-            </div>
-            <div class="field">
-              <label for="business">Entreprise <span class="hint">(facultatif)</span></label>
-              <input id="business" name="business" type="text" autocomplete="organization">
-            </div>
-            <div class="field full">
-              <label for="email">Courriel</label>
-              <input id="email" name="email" type="email" autocomplete="email" required>
-            </div>
-            <div class="field">
-              <label for="package">Forfait</label>
-              <select id="package" name="package">
-                <option value="Brand Site">Site vitrine</option>
-                <option value="Shop Launch">Lancement de boutique (Shopify)</option>
-                <option value="Not sure" selected>Je ne sais pas encore</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="budget">Budget</label>
-              <select id="budget" name="budget">
-                <option value="Under $2,500">Moins de 2 500 $</option>
-                <option value="$2,500–$4,000" selected>2 500 $ – 4 000 $</option>
-                <option value="$4,000–$6,000">4 000 $ – 6 000 $</option>
-                <option value="$6,000+">6 000 $ et plus</option>
-              </select>
-            </div>
-            <div class="field full">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" required></textarea>
-            </div>
-            <input type="hidden" name="_language" value="fr">
-            <div class="full"><button class="btn btn-primary" type="submit">Envoyer</button></div>
-            <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
-          </form>
+          <div class="form-card">
+            <form id="contact-form" class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+              <div class="field">
+                <label for="name">Nom</label>
+                <input class="input" id="name" name="name" type="text" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="business">Entreprise <span class="hint">(facultatif)</span></label>
+                <input class="input" id="business" name="business" type="text" autocomplete="organization">
+              </div>
+              <div class="field full">
+                <label for="email">Courriel</label>
+                <input class="input" id="email" name="email" type="email" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="package">Forfait</label>
+                <select class="input" id="package" name="package">
+                  <option value="Brand Site">Site vitrine</option>
+                  <option value="Shop Launch">Lancement de boutique (Shopify)</option>
+                  <option value="Not sure" selected>Je ne sais pas encore</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="budget">Budget</label>
+                <select class="input" id="budget" name="budget">
+                  <option value="Under $2,500">Moins de 2 500 $</option>
+                  <option value="$2,500–$4,000" selected>2 500 $ – 4 000 $</option>
+                  <option value="$4,000–$6,000">4 000 $ – 6 000 $</option>
+                  <option value="$6,000+">6 000 $ et plus</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="message">Message</label>
+                <textarea class="input" id="message" name="message" required></textarea>
+              </div>
+              <input type="hidden" name="_language" value="fr">
+              <div class="full"><button class="btn btn-primary" type="submit">Envoyer</button></div>
+              <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
 
-          <div>
+          <div class="side-stack">
             <div class="side-card">
               <h3>Réservez un appel gratuit de 15 minutes</h3>
               <p>Choisissez le moment qui vous convient. On parlera de votre entreprise et de la façon dont je peux vous aider.</p>
               <a class="btn btn-primary" href="https://cal.com/YOUR-USERNAME/15min" target="_blank" rel="noopener">Réserver un appel<span class="visually-hidden"> (s’ouvre dans un nouvel onglet)</span></a>
             </div>
             <div class="side-card promise">
-              <span aria-hidden="true">⏱</span>
-              <span>Je réponds en moins d’un jour ouvrable, en français ou en anglais.</span>
+              <span class="icon" aria-hidden="true">24h</span>
+              <p>Je réponds en moins d’un jour ouvrable, en français ou en anglais.</p>
             </div>
           </div>
         </div>
@@ -319,20 +368,23 @@
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="footer-brand">Ian Bédard</div>
+          <a class="logo" href="index.html"><span class="logo-mark" aria-hidden="true">IB</span>Ian Bédard</a>
           <p>Sites Web et boutiques Shopify bilingues et accessibles<br>pour les petites entreprises d’Ottawa–Gatineau.</p>
         </div>
-        <ul aria-label="Contact">
-          <li><a href="mailto:YOUR-EMAIL@example.com">YOUR-EMAIL@example.com</a></li>
-          <li><a href="https://www.linkedin.com/in/YOUR-LINKEDIN/" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (s’ouvre dans un nouvel onglet)</span></a></li>
-          <li><a href="../index.html" lang="en" hreflang="en">English</a></li>
-        </ul>
+        <div>
+          <div class="footer-title">contact</div>
+          <ul>
+            <li><a href="mailto:ian.bedard@hotmail.com">ian.bedard@hotmail.com</a></li>
+            <li><a href="https://www.linkedin.com/in/ianbedard/" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (s’ouvre dans un nouvel onglet)</span></a></li>
+            <li><a href="../index.html" lang="en" hreflang="en">English</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-bottom">© <span id="year">2026</span> Ian Bédard. Ottawa–Gatineau.</div>
+      <div class="footer-bottom"><span>© <span id="year">2026</span> Ian Bédard</span><span>Ottawa–Gatineau</span></div>
     </div>
   </footer>
 
