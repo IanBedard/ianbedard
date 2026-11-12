@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 800" width="390" height="800" role="img">
+<rect width="390" height="800" rx="44" fill="#1b1b1f"/>
+<clipPath id="s"><rect x="12" y="12" width="366" height="776" rx="34"/></clipPath>
+<g clip-path="url(#s)">
+<rect x="12" y="12" width="366" height="776" fill="#fff"/>
+<text x="44" y="44" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#111" text-anchor="start">9:41</text>
+<rect x="150" y="26" width="90" height="24" rx="12" fill="#1b1b1f"/>
+<text x="32" y="98" font-family="Georgia, serif" font-size="21" font-weight="700" fill="#2f3a2c" text-anchor="start">Atelier Argile</text>
+<rect x="278" y="80" width="38" height="24" rx="12" fill="none" stroke="#2f3a2c" stroke-opacity=".3"/>
+<text x="297" y="97" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11" font-weight="700" fill="#2f3a2c" text-anchor="middle">FR</text>
+<path d="M332 84h26M332 92h26M332 100h26" stroke="#2f3a2c" stroke-width="2.5" stroke-linecap="round"/>
+<rect x="12" y="122" width="366" height="380" fill="#eef0ea"/>
+<circle cx="195" cy="236" r="84" fill="#d9ddcd"/>
+<path d="M181.0 172.0 h28.0 q0 24.0 24.0 44.0 q20.0 36.0 0 76.0 h-104.0 q-20.0 -40.0 0 -76.0 q24.0 -20.0 24.0 -44.0 z" fill="#5f6f3a"/>
+<text x="32" y="370" font-family="Georgia, serif" font-size="25" font-weight="700" fill="#2f3a2c" text-anchor="start">Handmade ceramics</text>
+<text x="32" y="402" font-family="Georgia, serif" font-size="25" font-weight="700" fill="#2f3a2c" text-anchor="start">from the Outaouais</text>
+<rect x="32" y="430" width="326" height="50" rx="25" fill="#5f6f3a"/>
+<text x="195.0" y="461" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#fff" text-anchor="middle">Shop the collection</text>
+<text x="32" y="548" font-family="Georgia, serif" font-size="20" font-weight="700" fill="#2f3a2c" text-anchor="start">New this season</text>
+<rect x="32.0" y="566" width="156.0" height="150" rx="12" fill="#eef0ea"/>
+<path d="M62.0 633.8 A48.0 43.2 0 0 0 158.0 633.8 Z" fill="#c9b79c"/><ellipse cx="110.0" cy="633.8" rx="48.0" ry="8.64" fill="#000" opacity=".12"/>
+<text x="32.0" y="740" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#2f3a2c" text-anchor="start">Moon Bowl</text>
+<text x="32.0" y="760" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#5f6f3a" text-anchor="start">$48</text>
+<rect x="202.0" y="566" width="156.0" height="150" rx="12" fill="#eef0ea"/>
+<rect x="251.5" y="608.0" width="57.0" height="66.0" rx="8" fill="#6f7f55"/><path d="M308.5 624.5 q25.650000000000002 0 25.650000000000002 16.5 q0 16.5 -25.650000000000002 16.5" fill="none" stroke="#6f7f55" stroke-width="7.5"/>
+<text x="202.0" y="740" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" fill="#2f3a2c" text-anchor="start">Forest Mug</text>
+<text x="202.0" y="760" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#5f6f3a" text-anchor="start">$36</text>
+</g>
+</svg>

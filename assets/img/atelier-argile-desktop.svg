@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img">
+<rect width="1200" height="760" fill="#fff"/>
+<rect width="1200" height="44" fill="#e9e9ec"/>
+<circle cx="22" cy="22" r="6" fill="#ff5f57"/><circle cx="42" cy="22" r="6" fill="#febc2e"/><circle cx="62" cy="22" r="6" fill="#28c840"/>
+<rect x="380" y="11" width="440" height="22" rx="11" fill="#fff"/>
+<text x="600" y="27" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="400" fill="#555" text-anchor="middle">atelierargile.ca</text>
+<rect y="44" width="1200" height="64" fill="#fff"/>
+<text x="48" y="84" font-family="Georgia, serif" font-size="24" font-weight="700" fill="#2f3a2c" text-anchor="start">Atelier Argile</text>
+<text x="470" y="82" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="500" fill="#2f3a2c" text-anchor="start">Shop</text>
+<text x="546" y="82" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="500" fill="#2f3a2c" text-anchor="start">Classes</text>
+<text x="646" y="82" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="500" fill="#2f3a2c" text-anchor="start">Studio</text>
+<text x="738" y="82" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="500" fill="#2f3a2c" text-anchor="start">Journal</text>
+<rect x="980" y="62" width="74" height="28" rx="14" fill="none" stroke="#2f3a2c" stroke-opacity=".3"/>
+<text x="1017" y="81" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#2f3a2c" text-anchor="middle">EN | FR</text>
+<rect x="1080" y="60" width="72" height="32" rx="16" fill="#2f3a2c"/>
+<text x="1116" y="81" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="13" font-weight="600" fill="#fff" text-anchor="middle">Cart</text>
+<line x1="0" y1="108" x2="1200" y2="108" stroke="#000" stroke-opacity=".08"/>
+<rect y="108" width="1200" height="360" fill="#eef0ea"/>
+<text x="64" y="210" font-family="Georgia, serif" font-size="46" font-weight="700" fill="#2f3a2c" text-anchor="start">Handmade ceramics</text>
+<text x="64" y="266" font-family="Georgia, serif" font-size="46" font-weight="700" fill="#2f3a2c" text-anchor="start">from the Outaouais</text>
+<text x="64" y="312" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="18" font-weight="400" fill="#2f3a2c" text-anchor="start">New: wheel-throwing classes · book online</text>
+<rect x="64" y="342" width="246" height="52" rx="26" fill="#5f6f3a"/>
+<text x="187.0" y="374" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="17" font-weight="600" fill="#fff" text-anchor="middle">Shop the collection</text>
+<circle cx="930" cy="288" r="150" fill="#d9ddcd"/>
+<path d="M909.0 192.0 h42.0 q0 36.0 36.0 66.0 q30.0 54.0 0 114.0 h-156.0 q-30.0 -60.0 0 -114.0 q36.0 -30.0 36.0 -66.0 z" fill="#5f6f3a"/>
+<text x="64" y="524" font-family="Georgia, serif" font-size="26" font-weight="700" fill="#2f3a2c" text-anchor="start">New this season</text>
+<rect x="64" y="548" width="252" height="170" rx="12" fill="#eef0ea"/>
+<path d="M135.6 624.84 A54.4 48.96 0 0 0 244.4 624.84 Z" fill="#c9b79c"/><ellipse cx="190.0" cy="624.84" rx="54.4" ry="9.792" fill="#000" opacity=".12"/>
+<text x="64" y="742" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#2f3a2c" text-anchor="start">Moon Bowl</text>
+<text x="316" y="742" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#5f6f3a" text-anchor="end">$48</text>
+<rect x="340" y="548" width="252" height="170" rx="12" fill="#eef0ea"/>
+<rect x="433.7" y="595.6" width="64.6" height="74.8" rx="8" fill="#6f7f55"/><path d="M498.3 614.3 q29.069999999999997 0 29.069999999999997 18.7 q0 18.7 -29.069999999999997 18.7" fill="none" stroke="#6f7f55" stroke-width="8.5"/>
+<text x="340" y="742" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#2f3a2c" text-anchor="start">Forest Mug</text>
+<text x="592" y="742" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#5f6f3a" text-anchor="end">$36</text>
+<rect x="616" y="548" width="252" height="170" rx="12" fill="#eef0ea"/>
+<path d="M730.1 578.6 h23.799999999999997 q0 20.4 20.4 37.400000000000006 q17.0 30.6 0 64.6 h-88.4 q-17.0 -34.0 0 -64.6 q20.4 -17.0 20.4 -37.400000000000006 z" fill="#a99f8d"/>
+<text x="616" y="742" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#2f3a2c" text-anchor="start">Pebble Vase</text>
+<text x="868" y="742" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#5f6f3a" text-anchor="end">$85</text>
+<rect x="892" y="548" width="252" height="170" rx="12" fill="#eef0ea"/>
+<rect x="961.9" y="597.3" width="112.2" height="71.39999999999999" rx="8" fill="#5f6f3a"/><circle cx="986.584" cy="620.148" r="6.8" fill="#fff" opacity=".8"/><rect x="977.608" y="641.568" width="56.1" height="6" rx="3" fill="#fff" opacity=".8"/>
+<text x="892" y="742" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#2f3a2c" text-anchor="start">Class gift card</text>
+<text x="1144" y="742" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600" fill="#5f6f3a" text-anchor="end">$95</text>
+</svg>
