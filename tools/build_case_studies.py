@@ -35,7 +35,7 @@ P = [
              "<b>Product pages</b> with tasting notes, origin and process, size and grind options, and a subscribe-or-buy-once choice",
              "<b>“Find your roast”</b> paths (light, medium, dark, decaf) for customers who aren’t sure where to start",
              "<b>Brew guides</b> for pour-over, French press and moka pot",
-             "<b>Accessibility</b>: built to WCAG 2.2 AA, with an accessibility statement and a way to ask for help",
+             "<b>Accessible to everyone</b>: built to the WCAG 2.2 AA standard, with an accessibility statement and a way to ask for help",
              "<b>Bilingual touches</b> in the announcement bar and section labels (FR/EN)",
              "<b>Custom theme</b> designed in Figma, then built in Shopify"],
       cap=["Product page: tasting notes, size and grind, and subscribe-and-save", "Subscriptions page: three simple steps", "Collection page with roast filters"]),
@@ -47,7 +47,7 @@ P = [
              "<b>Pages produits</b> avec notes de dégustation, origine et procédé, choix de format et de mouture, et option abonnement ou achat unique",
              "Parcours <b>« Trouvez votre torréfaction »</b> (légère, moyenne, foncée, décaféiné) pour ceux qui ne savent pas par où commencer",
              "<b>Guides d’infusion</b> : filtre, piston et cafetière italienne",
-             "<b>Accessibilité</b> : conforme aux WCAG 2.2 AA, avec un énoncé d’accessibilité et un moyen de demander de l’aide",
+             "<b>Accessible à tous</b> : conforme à la norme WCAG 2.2 AA, avec un énoncé d’accessibilité et un moyen de demander de l’aide",
              "<b>Touches bilingues</b> dans la bannière d’annonce et les titres de section (FR/EN)",
              "<b>Thème sur mesure</b> conçu dans Figma, puis bâti dans Shopify"],
       cap=["Page produit : notes de dégustation, format, mouture et abonnement", "Page abonnements : trois étapes simples", "Page de collection avec filtres par torréfaction"])),
@@ -80,7 +80,7 @@ P = [
       goal=["Physio Rivière’s old site was English-only, hard to use on phones, and didn’t show up well in local searches. Many patients have limited mobility or low vision, so accessibility mattered.",
             "The clinic wanted patients to find it on Google, understand its services and book an assessment in a few taps."],
       built=["<b>8-page bilingual site (FR/EN)</b>: services, team, pricing and direct billing, FAQ and contact",
-             "<b>WCAG 2.2 AA</b>: large text, strong contrast, works fully with a keyboard and screen reader",
+             "<b>Accessible to everyone</b>: large text, strong contrast, works fully with a keyboard and screen reader",
              "<b>Online booking</b> button connected to the clinic’s existing booking system",
              "<b>Google Business Profile</b> set up with hours, services, photos and both languages",
              "<b>Basic SEO</b>: page titles, descriptions and local business information",
@@ -91,7 +91,7 @@ P = [
       goal=["L’ancien site de Physio Rivière était en anglais seulement, difficile à utiliser sur un téléphone, et peu visible dans les recherches locales. Beaucoup de patients ont une mobilité réduite ou une basse vision : l’accessibilité était essentielle.",
             "La clinique voulait que les patients la trouvent sur Google, comprennent ses services et réservent une évaluation en quelques clics."],
       built=["<b>Site bilingue de 8 pages (FR/EN)</b> : services, équipe, tarifs et facturation directe, FAQ et contact",
-             "<b>WCAG 2.2 AA</b> : grand texte, fort contraste, entièrement utilisable au clavier et avec un lecteur d’écran",
+             "<b>Accessible à tous</b> : grand texte, fort contraste, entièrement utilisable au clavier et avec un lecteur d’écran",
              "Bouton de <b>réservation en ligne</b> relié au système de réservation de la clinique",
              "<b>Profil d’entreprise Google</b> configuré : heures, services, photos, dans les deux langues",
              "<b>Référencement de base</b> : titres, descriptions et renseignements d’entreprise locale",
@@ -101,35 +101,35 @@ P = [
 
 T = dict(
   en=dict(lang="en", other="fr", home="../index.html", work_anchor="#work", nav="Main",
-    other_label="FR", skip="Skip to main content", crumbs_home="home", crumbs_work="work",
-    concept="Concept project", live="Live demo", type_l="type", client_l="business", scope_l="package",
+    other_label="FR", skip="Skip to main content", crumbs_home="Home", crumbs_work="My work",
+    concept="Concept project", live="Live demo", type_l="Type", client_l="Business", scope_l="Package",
     explore_h="Explore the live store", explore_p="This is the real site, captured from the live demo. Scroll inside the frames to browse it.",
-    scroll_hint="↕ scroll inside the frame", desk="Desktop", mob="Mobile",
+    scroll_hint="Tip: scroll inside the frames to look around the store.", desk="Desktop", mob="Mobile",
     shots_h="Screenshots", shots_p="Desktop and mobile views of the concept design.",
     goal_h="The goal", built_h="What I built", details_h="Details",
     results_h="Results",
     results="This is a concept project, so there are no client results yet. When I work with real clients, this section will include their testimonial and measurable results, such as more online orders or bookings.",
-    demo_open="Open the live store", figma_btn="View the design in Figma", pw_l="Store password",
+    demo_open="Open the live store", figma_btn="View the design in Figma", pw_l="Store password:",
     demo_h="Want to see it live?", demo_p="The demo is password-protected. Contact me and I’ll send you the link and password.",
     demo_btn="Request demo access",
-    cta_h="Want a store like this?", cta_p="Founding-client pricing is open now. I reply within 1 business day.",
+    cta_h="Want a store like this?", cta_p="Introductory prices for my first clients. I reply within 1 business day.",
     start="Start a project like this", next="Next project",
     newtab=" (opens in a new tab)", scroll_label="scrollable preview",
     footer="Bilingual, accessible websites and Shopify stores<br>for small businesses in Ottawa–Gatineau.",
     title_suffix="Case study | Ian Bédard"),
   fr=dict(lang="fr", other="en", home="../index.html", work_anchor="#realisations", nav="Principal",
-    other_label="EN", skip="Passer au contenu principal", crumbs_home="accueil", crumbs_work="réalisations",
-    concept="Projet conceptuel", live="Démo en ligne", type_l="type", client_l="entreprise", scope_l="forfait",
+    other_label="EN", skip="Passer au contenu principal", crumbs_home="Accueil", crumbs_work="Réalisations",
+    concept="Projet conceptuel", live="Démo en ligne", type_l="Type", client_l="Entreprise", scope_l="Forfait",
     explore_h="Explorez la boutique en ligne", explore_p="Voici le vrai site, capturé à partir de la démo en ligne. Faites défiler l’intérieur des cadres pour le parcourir.",
-    scroll_hint="↕ faites défiler dans le cadre", desk="Ordinateur", mob="Mobile",
+    scroll_hint="Astuce : faites défiler l’intérieur des cadres pour parcourir la boutique.", desk="Ordinateur", mob="Mobile",
     shots_h="Captures d’écran", shots_p="Vues ordinateur et mobile de la maquette conceptuelle.",
     goal_h="L’objectif", built_h="Ce que j’ai réalisé", details_h="Détails",
     results_h="Résultats",
     results="Il s’agit d’un projet conceptuel, donc il n’y a pas encore de résultats client. Avec de vrais clients, cette section présentera leur témoignage et des résultats mesurables, comme une hausse des commandes ou des réservations en ligne.",
-    demo_open="Ouvrir la boutique en ligne", figma_btn="Voir la maquette dans Figma", pw_l="Mot de passe de la boutique",
+    demo_open="Ouvrir la boutique en ligne", figma_btn="Voir la maquette dans Figma", pw_l="Mot de passe de la boutique :",
     demo_h="Envie de la voir en ligne?", demo_p="La démo est protégée par un mot de passe. Écrivez-moi et je vous enverrai le lien et le mot de passe.",
     demo_btn="Demander l’accès à la démo",
-    cta_h="Une boutique comme celle-ci?", cta_p="Les prix « premiers clients » sont offerts dès maintenant. Je réponds en moins d’un jour ouvrable.",
+    cta_h="Une boutique comme celle-ci?", cta_p="Prix de lancement pour mes premiers clients. Je réponds en moins d’un jour ouvrable.",
     start="Démarrer un projet comme celui-ci", next="Projet suivant",
     newtab=" (s’ouvre dans un nouvel onglet)", scroll_label="aperçu défilant",
     footer="Sites Web et boutiques Shopify bilingues et accessibles<br>pour les petites entreprises d’Ottawa–Gatineau.",
@@ -160,14 +160,14 @@ def hero(p, t, c):
         actions = ext(p["demo"], t["demo_open"], t, "btn btn-primary")
         if p.get("figma"):
             actions += "\n            " + ext(p["figma"], t["figma_btn"], t)
-        actions += f'\n          </div>\n          <p class="demo-pass">{t["pw_l"]}: <code>{p["password"]}</code></p>'
+        actions += f'\n          </div>\n          <p class="demo-pass">{t["pw_l"]} <strong>{p["password"]}</strong></p>'
     else:
         actions = (f'<a class="btn btn-primary" href="{t["home"]}#contact">{t["demo_btn"]}</a>\n'
                    f'          </div>\n          <p class="demo-pass">{t["demo_p"]}</p>')
-    return f"""    <section class="case-hero deep glow grid-lines" aria-labelledby="case-title">
+    return f"""    <section class="case-hero deep glow" aria-labelledby="case-title">
       <div class="container">
         <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="{t['home']}">{t['crumbs_home']}</a> / <a href="{t['home']}{t['work_anchor']}">{t['crumbs_work']}</a> / <span aria-current="page">{p['slug']}</span>
+          <a href="{t['home']}">{t['crumbs_home']}</a> / <a href="{t['home']}{t['work_anchor']}">{t['crumbs_work']}</a> / <span aria-current="page">{p['name']}</span>
         </nav>
         <div class="badges">{badges}</div>
         <h1 id="case-title">{p['name']}</h1>
@@ -191,7 +191,7 @@ def showcase(p, t, a):
                                  f'<img src="{img}{s["full"]}" alt="" width="2880" loading="lazy"></div>')
         phone = (f'<div class="mockup-phone"><div class="screen scroll" tabindex="0" role="region" aria-label="{p["name"]}: {t["mob"]}, {t["scroll_label"]}">'
                  f'<img src="{img}{s["mobile_full"]}" alt="" width="780" loading="lazy"></div></div>')
-        head, sub, hint = t["explore_h"], t["explore_p"], f'<p class="scroll-hint" aria-hidden="true">{t["scroll_hint"]}</p>'
+        head, sub, hint = t["explore_h"], t["explore_p"], f'<p class="scroll-hint">{t["scroll_hint"]}</p>'
     else:
         img = f"{a}assets/img/{p['slug']}"
         desk = browser(p["url"], f'<div class="screen"><img src="{img}-desktop.svg" alt="" width="1200" height="716"></div>')
@@ -248,13 +248,13 @@ def page(i, lang):
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{p['name']}: {t['title_suffix']}</title>
   <meta name="description" content="{c['intro']}">
-  <meta name="theme-color" content="#070b14">
+  <meta name="theme-color" content="#22102c">
   <link rel="alternate" hreflang="{t['lang']}" href="{p['slug']}.html">
   <link rel="alternate" hreflang="{t['other']}" href="{other_href}">
   <link rel="icon" href="{FAVICON}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="{a}assets/css/style.css">
 </head>
 <body>
@@ -281,12 +281,10 @@ def page(i, lang):
       <div class="container">
         <div class="split">
           <div class="card"><div class="card-body">
-            <span class="eyebrow">01</span>
             <h2>{t['goal_h']}</h2>
 {goal}
           </div></div>
           <div class="card"><div class="card-body">
-            <span class="eyebrow">02</span>
             <h2>{t['built_h']}</h2>
             <ul class="feature-list">
 {built}
@@ -333,7 +331,7 @@ def page(i, lang):
           <p>{t['footer']}</p>
         </div>
         <div>
-          <div class="footer-title">contact</div>
+          <div class="footer-title">Contact</div>
           <ul>
             <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
             <li><a href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden">{t['newtab']}</span></a></li>
