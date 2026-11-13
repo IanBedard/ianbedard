@@ -22,6 +22,53 @@ def zoom(x0, y0):
 ZOOMS = [zoom(780, 0), zoom(30, 110), zoom(40, 416)]
 
 P = [
+  dict(slug="denise-levesque", name="Denise Levesque", url="deniselevesque.ca", client_project=True,
+    site="https://staging.deniselevesque.ca/",
+    old_site="https://web.archive.org/web/20190719171715/https://deniselevesque.ca/test_site/",
+    compare=dict(before="before-desktop.jpg", before_w=1600, after="home-desktop.jpg", after_w=800,
+                 mobile="home-mobile.jpg", mobile_w=533,
+                 before_url="deniselevesque.ca (2019)", after_url="deniselevesque.ca (2026)"),
+    shots=dict(details=["gallery-desktop.jpg", "about-desktop.jpg", "contact-desktop.jpg"], w=800, h=500),
+    en=dict(type="WordPress redesign", client="Painter, exhibiting since 1977", scope="Redesign, content and speed",
+      client_l="Client", scope_l="Scope",
+      intro="A modern, bilingual portfolio for a painter who has exhibited in Canada and France since 1977, rebuilt on WordPress so she can keep updating it herself.",
+      goal=["Denise Levesque’s website had grown over the years into nine gallery pages, long mixed French-and-English text, and heavy, full-size images. Her paintings deserved a calmer showcase, and visitors had no clear way to ask about a piece.",
+            "Denise was comfortable with WordPress and wanted to keep it as her content management system. So the job was to modernize the site <b>inside</b> WordPress: no new platform to learn, no lost content, and no broken links."],
+      built=["<b>Kept WordPress</b> (Divi and Polylang), so Denise still edits her own pages, artworks and exhibitions",
+             "<b>Galleries simplified</b> from nine menu entries to three main collections, plus an Archives page for earlier series",
+             "<b>New About page</b>: key facts at a glance, and her full exhibition history as a clear timeline instead of closed accordions",
+             "<b>Contact page</b> that every “Interested in an artwork?” button now leads to",
+             "<b>Bilingual, done properly</b>: 146 grammar and wording fixes in French and English, and an English CV that is finally in English",
+             "<b>Accessible artwork</b>: 303 paintings given text descriptions for screen readers and Google Images",
+             "<b>Faster pages</b>: lighter WebP images, and videos that load only when someone presses play",
+             "<b>No broken links</b>: every old address redirects to the right section of its new page"],
+      cap=["Collection pages open with the artist’s own words", "About page: key facts and a full exhibition timeline", "One clear Contact page for questions about artworks"],
+      before_cap="Before: the 2019 site", after_cap="After: the new home page",
+      results_p="The new site is in final review with Denise on a staging copy before it goes live. Measured on that copy:",
+      stats=[("6.7 MB → 1.5 MB", "Images on the home page, with the same look. All the images the site can show went from 36 MB to 12 MB."),
+             ("303 artworks", "Now described in both languages for people using screen readers, and for Google Images."),
+             ("12 old addresses", "Redirect to the right section of the new pages, so links from galleries and search results keep working.")],
+      cta_h="Have a WordPress site that needs a refresh?"),
+    fr=dict(type="Refonte WordPress", client="Artiste peintre, expose depuis 1977", scope="Refonte, contenu et vitesse",
+      client_l="Cliente", scope_l="Mandat",
+      intro="Un portfolio bilingue et moderne pour une artiste peintre qui expose au Canada et en France depuis 1977, refait dans WordPress pour qu’elle puisse continuer à le mettre à jour elle-même.",
+      goal=["Au fil des ans, le site de Denise Levesque était devenu un ensemble de neuf pages de galeries, de longs textes mêlant français et anglais, et d’images lourdes en pleine taille. Ses tableaux méritaient une vitrine plus sereine, et les visiteurs ne savaient pas comment s’informer sur une œuvre.",
+            "Denise connaissait WordPress et voulait le garder comme système de gestion de contenu. Le mandat : moderniser le site <b>dans</b> WordPress, sans nouvelle plateforme à apprendre, sans perdre de contenu et sans briser de liens."],
+      built=["<b>WordPress conservé</b> (Divi et Polylang) : Denise modifie toujours elle-même ses pages, ses œuvres et ses expositions",
+             "<b>Galeries simplifiées</b> : de neuf entrées de menu à trois grandes collections, plus une page Archives pour les séries antérieures",
+             "<b>Nouvelle page À propos</b> : l’essentiel en un coup d’œil, et tout son parcours d’expositions présenté en chronologie claire plutôt que dans des accordéons fermés",
+             "<b>Page Contact</b> vers laquelle mènent tous les boutons « Une œuvre vous intéresse? »",
+             "<b>Vraiment bilingue</b> : 146 corrections de grammaire et de formulation en français et en anglais, et un CV anglais enfin en anglais",
+             "<b>Œuvres accessibles</b> : 303 tableaux décrits pour les lecteurs d’écran et Google Images",
+             "<b>Pages plus rapides</b> : images WebP plus légères, et vidéos qui ne se chargent qu’au clic",
+             "<b>Aucun lien brisé</b> : chaque ancienne adresse redirige vers la bonne section de sa nouvelle page"],
+      cap=["Les pages de collection s’ouvrent sur les mots de l’artiste", "Page À propos : l’essentiel et la chronologie complète des expositions", "Une seule page Contact pour les questions sur les œuvres"],
+      before_cap="Avant : le site de 2019", after_cap="Après : la nouvelle page d’accueil",
+      results_p="Le nouveau site est en révision finale avec Denise sur une copie de préproduction avant sa mise en ligne. Mesuré sur cette copie :",
+      stats=[("6,7 Mo → 1,5 Mo", "Images de la page d’accueil, pour le même rendu. L’ensemble des images du site est passé de 36 Mo à 12 Mo."),
+             ("303 œuvres", "Maintenant décrites dans les deux langues pour les personnes qui utilisent un lecteur d’écran, et pour Google Images."),
+             ("12 anciennes adresses", "Redirigent vers la bonne section des nouvelles pages : les liens des galeries et des résultats de recherche fonctionnent toujours.")],
+      cta_h="Votre site WordPress a besoin d’un coup de neuf?")),
   dict(slug="cafe-brume", name="Café Brume", url="cafe-brume.myshopify.com",
     demo="https://cafe-brume.myshopify.com/", password="cafebrume",
     figma="https://www.figma.com/design/1NcVyYHfctXZY5UNMz49RK",
@@ -116,7 +163,11 @@ T = dict(
     start="Start a project like this", next="Next project",
     newtab=" (opens in a new tab)", scroll_label="scrollable preview",
     footer="Bilingual, accessible websites and Shopify stores<br>for small businesses in Ottawa–Gatineau.",
-    title_suffix="Case study | Ian Bédard"),
+    title_suffix="Case study | Ian Bédard",
+    client_badge="Client project", site_btn="View the new site", old_btn="See the 2019 site",
+    site_note="The new site is in final review on a staging address before launch.",
+    compare_h="Before and after", compare_p="The same artist, the same paintings, the same WordPress, made calm, clear and bilingual.",
+    mob_after="After, on a phone"),
   fr=dict(lang="fr", other="en", home="../index.html", work_anchor="#realisations", nav="Principal",
     other_label="EN", skip="Passer au contenu principal", crumbs_home="Accueil", crumbs_work="Réalisations",
     concept="Projet conceptuel", live="Démo en ligne", type_l="Type", client_l="Entreprise", scope_l="Forfait",
@@ -133,7 +184,11 @@ T = dict(
     start="Démarrer un projet comme celui-ci", next="Projet suivant",
     newtab=" (s’ouvre dans un nouvel onglet)", scroll_label="aperçu défilant",
     footer="Sites Web et boutiques Shopify bilingues et accessibles<br>pour les petites entreprises d’Ottawa–Gatineau.",
-    title_suffix="Étude de cas | Ian Bédard"),
+    title_suffix="Étude de cas | Ian Bédard",
+    client_badge="Projet client", site_btn="Voir le nouveau site", old_btn="Voir le site de 2019",
+    site_note="Le nouveau site est en révision finale sur une adresse de préproduction avant sa mise en ligne.",
+    compare_h="Avant et après", compare_p="La même artiste, les mêmes tableaux, le même WordPress, rendus sereins, clairs et bilingues.",
+    mob_after="Après, sur un téléphone"),
 )
 
 
@@ -152,8 +207,12 @@ def hero(p, t, c):
     badges = f'<span class="badge">{c["type"]}</span>'
     if p.get("demo"):
         badges += f'<span class="badge badge-live">{t["live"]}</span>'
-    badges += f'<span class="badge">{t["concept"]}</span>'
-    if p.get("demo"):
+    badges += f'<span class="badge">{t["client_badge"] if p.get("client_project") else t["concept"]}</span>'
+    if p.get("client_project"):
+        actions = ext(p["site"], t["site_btn"], t, "btn btn-primary")
+        actions += "\n            " + ext(p["old_site"], t["old_btn"], t)
+        actions += f'\n          </div>\n          <p class="demo-pass">{t["site_note"]}</p>'
+    elif p.get("demo"):
         actions = ext(p["demo"], t["demo_open"], t, "btn btn-primary")
         if p.get("figma"):
             actions += "\n            " + ext(p["figma"], t["figma_btn"], t)
@@ -171,8 +230,8 @@ def hero(p, t, c):
         <p class="lead">{c['intro']}</p>
         <dl class="case-meta">
           <div><dt>{t['type_l']}</dt><dd>{c['type']}</dd></div>
-          <div><dt>{t['client_l']}</dt><dd>{c['client']}</dd></div>
-          <div><dt>{t['scope_l']}</dt><dd>{c['scope']}</dd></div>
+          <div><dt>{c.get('client_l', t['client_l'])}</dt><dd>{c['client']}</dd></div>
+          <div><dt>{c.get('scope_l', t['scope_l'])}</dt><dd>{c['scope']}</dd></div>
         </dl>
         <div class="btn-row">
           {actions}
@@ -180,7 +239,38 @@ def hero(p, t, c):
     </section>"""
 
 
+def compare(p, t, c, a):
+    img, k = f"{a}assets/img/{p['slug']}/", p["compare"]
+    before = browser(k["before_url"], f'<div class="screen"><img src="{img}{k["before"]}" alt="" width="{k["before_w"]}" height="{k["before_w"] * 10 // 16}" loading="lazy"></div>')
+    after = browser(k["after_url"], f'<div class="screen"><img src="{img}{k["after"]}" alt="" width="{k["after_w"]}" height="{k["after_w"] * 10 // 16}" loading="lazy"></div>')
+    phone = f'<div class="mockup-phone"><div class="screen"><img src="{img}{k["mobile"]}" alt="" width="{k["mobile_w"]}" loading="lazy"></div></div>'
+    return f"""    <section class="bg-base-200 section-tight" aria-labelledby="explore-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="explore-title">{t['compare_h']}</h2>
+          <p>{t['compare_p']}</p>
+        </div>
+        <div class="compare">
+          <figure>
+            {before}
+            <figcaption>{c['before_cap']}</figcaption>
+          </figure>
+          <figure>
+            {after}
+            <figcaption>{c['after_cap']}</figcaption>
+          </figure>
+          <figure class="phone-col">
+            {phone}
+            <figcaption>{t['mob_after']}</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>"""
+
+
 def showcase(p, t, a):
+    if p.get("compare"):
+        return compare(p, t, p[t["lang"]], a)
     if p.get("shots"):
         img = f"{a}assets/img/{p['slug']}/"
         s = p["shots"]
@@ -218,8 +308,9 @@ def showcase(p, t, a):
 def details(p, t, c, a):
     figs = []
     if p.get("shots"):
+        w, h = p["shots"].get("w", 2880), p["shots"].get("h", 1800)
         for f, cap in zip(p["shots"]["details"], c["cap"]):
-            inner = f'<div class="screen"><img src="{a}assets/img/{p["slug"]}/{f}" alt="" width="2880" height="1800" loading="lazy"></div>'
+            inner = f'<div class="screen"><img src="{a}assets/img/{p["slug"]}/{f}" alt="" width="{w}" height="{h}" loading="lazy"></div>'
             figs.append(f'<figure>{browser(p["url"], inner)}<figcaption>{cap}</figcaption></figure>')
     else:
         for z, cap in zip(ZOOMS, c["cap"]):
@@ -238,6 +329,14 @@ def page(i, lang):
     cta_btns = f'<a class="btn btn-primary" href="{t["home"]}#contact">{t["start"]}</a>'
     if p.get("demo"):
         cta_btns += "\n            " + ext(p["demo"], t["demo_open"], t)
+    if p.get("client_project"):
+        cta_btns += "\n            " + ext(p["site"], t["site_btn"], t)
+    if c.get("stats"):
+        tiles = "\n".join(f'          <div class="stat"><h3>{h}</h3><p>{d}</p></div>' for h, d in c["stats"])
+        results = f'<p class="results-lead">{c["results_p"]}</p>\n        <div class="stats">\n{tiles}\n        </div>'
+    else:
+        results = f'<p class="results-placeholder">{t["results"]}</p>'
+    cta_h = c.get("cta_h", t["cta_h"])
     return f"""<!doctype html>
 <html lang="{t['lang']}">
 <head>
@@ -301,11 +400,11 @@ def page(i, lang):
     <section class="section-tight" aria-labelledby="results-title">
       <div class="container">
         <div class="section-head"><h2 id="results-title">{t['results_h']}</h2></div>
-        <p class="results-placeholder">{t['results']}</p>
+        {results}
 
         <div class="cta-box deep" data-waves="both" data-waves-lines="10">
           <div>
-            <h2>{t['cta_h']}</h2>
+            <h2>{cta_h}</h2>
             <p>{t['cta_p']}</p>
           </div>
           <div class="btn-row">

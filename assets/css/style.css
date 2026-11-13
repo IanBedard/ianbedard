@@ -456,6 +456,14 @@ select.input { appearance: none; padding-right: 2.5rem;
 .split .feature-list { font-size: 1rem; gap: .65rem; }
 .split .feature-list b { color: var(--base-content); }
 
+/* Before / after on a real client project */
+.compare { display: grid; grid-template-columns: 1fr 1fr 200px; gap: clamp(1.25rem, 3vw, 2rem); align-items: start; }
+.compare figure { margin: 0; }
+.compare figcaption { font-size: .93rem; color: var(--muted); margin-top: .75rem; }
+@media (max-width: 1000px) { .compare { grid-template-columns: 1fr 1fr; } .compare .phone-col { grid-column: 1 / -1; width: 220px; margin: 0 auto; } }
+@media (max-width: 640px) { .compare { grid-template-columns: 1fr; } }
+.results-lead { margin: 0 0 1.5rem; color: var(--muted); max-width: 62ch; }
+
 .shots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
 .shots figure { margin: 0; }
 @media (max-width: 860px) { .shots { grid-template-columns: 1fr; } }
