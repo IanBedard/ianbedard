@@ -23,10 +23,10 @@ ZOOMS = [zoom(780, 0), zoom(30, 110), zoom(40, 416)]
 
 P = [
   dict(slug="denise-levesque", name="Denise Levesque", url="deniselevesque.ca", client_project=True,
-    site="https://staging.deniselevesque.ca/",
+    site="https://deniselevesque.ca/",
     old_site="https://web.archive.org/web/20190719171715/https://deniselevesque.ca/test_site/",
     compare=dict(before="before-desktop.jpg", before_w=1600, after="home-desktop.jpg", after_w=800,
-                 mobile="home-mobile.jpg", mobile_w=533,
+                 mobile="home-mobile.jpg", mobile_w=780,
                  before_url="deniselevesque.ca (2019)", after_url="deniselevesque.ca (2026)"),
     shots=dict(details=["gallery-desktop.jpg", "about-desktop.jpg", "contact-desktop.jpg"], w=800, h=500),
     en=dict(type="WordPress redesign", client="Painter, exhibiting since 1977", scope="Redesign, content and speed",
@@ -44,7 +44,7 @@ P = [
              "<b>No broken links</b>: every old address redirects to the right section of its new page"],
       cap=["Collection pages open with the artist’s own words", "About page: key facts and a full exhibition timeline", "One clear Contact page for questions about artworks"],
       before_cap="Before: the 2019 site", after_cap="After: the new home page",
-      results_p="The new site is in final review with Denise on a staging copy before it goes live. Measured on that copy:",
+      results_p="The new site is now live. Measured before and after the redesign:",
       stats=[("6.7 MB → 1.5 MB", "Images on the home page, with the same look. All the images the site can show went from 36 MB to 12 MB."),
              ("303 artworks", "Now described in both languages for people using screen readers, and for Google Images."),
              ("12 old addresses", "Redirect to the right section of the new pages, so links from galleries and search results keep working.")],
@@ -64,7 +64,7 @@ P = [
              "<b>Aucun lien brisé</b> : chaque ancienne adresse redirige vers la bonne section de sa nouvelle page"],
       cap=["Les pages de collection s’ouvrent sur les mots de l’artiste", "Page À propos : l’essentiel et la chronologie complète des expositions", "Une seule page Contact pour les questions sur les œuvres"],
       before_cap="Avant : le site de 2019", after_cap="Après : la nouvelle page d’accueil",
-      results_p="Le nouveau site est en révision finale avec Denise sur une copie de préproduction avant sa mise en ligne. Mesuré sur cette copie :",
+      results_p="Le nouveau site est maintenant en ligne. Mesuré avant et après la refonte :",
       stats=[("6,7 Mo → 1,5 Mo", "Images de la page d’accueil, pour le même rendu. L’ensemble des images du site est passé de 36 Mo à 12 Mo."),
              ("303 œuvres", "Maintenant décrites dans les deux langues pour les personnes qui utilisent un lecteur d’écran, et pour Google Images."),
              ("12 anciennes adresses", "Redirigent vers la bonne section des nouvelles pages : les liens des galeries et des résultats de recherche fonctionnent toujours.")],
@@ -164,8 +164,8 @@ T = dict(
     newtab=" (opens in a new tab)", scroll_label="scrollable preview",
     footer="Bilingual, accessible websites and Shopify stores<br>for small businesses in Ottawa–Gatineau.",
     title_suffix="Case study | Ian Bédard",
-    client_badge="Client project", site_btn="View the new site", old_btn="See the 2019 site",
-    site_note="The new site is in final review on a staging address before launch.",
+    client_badge="Client project", site_btn="Visit the live site", live_site="Live site", old_btn="See the 2019 site",
+    site_note="Live at deniselevesque.ca, in French and English.",
     compare_h="Before and after", compare_p="The same artist, the same paintings, the same WordPress, made calm, clear and bilingual.",
     mob_after="After, on a phone"),
   fr=dict(lang="fr", other="en", home="../index.html", work_anchor="#realisations", nav="Principal",
@@ -185,8 +185,8 @@ T = dict(
     newtab=" (s’ouvre dans un nouvel onglet)", scroll_label="aperçu défilant",
     footer="Sites Web et boutiques Shopify bilingues et accessibles<br>pour les petites entreprises d’Ottawa–Gatineau.",
     title_suffix="Étude de cas | Ian Bédard",
-    client_badge="Projet client", site_btn="Voir le nouveau site", old_btn="Voir le site de 2019",
-    site_note="Le nouveau site est en révision finale sur une adresse de préproduction avant sa mise en ligne.",
+    client_badge="Projet client", site_btn="Visiter le site en ligne", live_site="Site en ligne", old_btn="Voir le site de 2019",
+    site_note="En ligne à deniselevesque.ca, en français et en anglais.",
     compare_h="Avant et après", compare_p="La même artiste, les mêmes tableaux, le même WordPress, rendus sereins, clairs et bilingues.",
     mob_after="Après, sur un téléphone"),
 )
@@ -207,6 +207,8 @@ def hero(p, t, c):
     badges = f'<span class="badge">{c["type"]}</span>'
     if p.get("demo"):
         badges += f'<span class="badge badge-live">{t["live"]}</span>'
+    elif p.get("client_project"):
+        badges += f'<span class="badge badge-live">{t["live_site"]}</span>'
     badges += f'<span class="badge">{t["client_badge"] if p.get("client_project") else t["concept"]}</span>'
     if p.get("client_project"):
         actions = ext(p["site"], t["site_btn"], t, "btn btn-primary")
