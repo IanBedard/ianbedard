@@ -351,7 +351,7 @@ def page(i, lang):
   <meta name="theme-color" content="#0f0f0f">
   <link rel="alternate" hreflang="{t['lang']}" href="{p['slug']}.html">
   <link rel="alternate" hreflang="{t['other']}" href="{other_href}">
-  <link rel="icon" href="{a}assets/img/logo-mark.svg" type="image/svg+xml">
+  <link rel="icon" href="{a}assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap">

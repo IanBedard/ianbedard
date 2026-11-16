@@ -324,6 +324,115 @@
     document.addEventListener("mouseup", function () { dot.classList.remove("is-down"); });
   }
 
+  // About page timeline: the rail fills and each role lights up as it passes 60% of the viewport
+  var timeline = document.querySelector(".timeline");
+  if (timeline) {
+    var fill = document.createElement("span");
+    fill.className = "timeline-fill";
+    fill.setAttribute("aria-hidden", "true");
+    timeline.appendChild(fill);
+    var roles = timeline.querySelectorAll(".tl-item");
+    var tlTicking = false;
+    var paint = function () {
+      tlTicking = false;
+      var line = window.innerHeight * .6, box = timeline.getBoundingClientRect();
+      fill.style.transform = "scaleY(" + Math.max(0, Math.min(1, (line - box.top) / box.height)).toFixed(4) + ")";
+      roles.forEach(function (li) { li.classList.toggle("is-active", li.getBoundingClientRect().top < line); });
+    };
+    window.addEventListener("scroll", function () {
+      if (!tlTicking) { tlTicking = true; requestAnimationFrame(paint); }
+    }, { passive: true });
+    window.addEventListener("resize", paint);
+    paint();
+  }
+
+  // About page toolkit: every tool sits on a slowly turning globe, tied to the hub by a hairline.
+  // Nearer tags are larger and brighter; the pointer tilts the globe and nudges the hub.
+  // Without JS the tools stay a plain list; with reduced motion the globe doesn't spin on its own.
+  var kit = document.querySelector(".toolkit");
+  if (kit) {
+    var globe = kit.querySelector(".toolkit-globe");
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    var wires = [0, 1, 2, 3, 4].map(function () {
+      var el = document.createElementNS(NS, "ellipse");
+      el.setAttribute("class", "wire");
+      svg.appendChild(el);
+      return el;
+    });
+    var tags = [];
+    kit.querySelectorAll(".toolkit-list > li").forEach(function (group) {
+      tags.push({ text: group.querySelector("h3").textContent, group: true });
+      group.querySelectorAll("li").forEach(function (li) { tags.push({ text: li.textContent }); });
+    });
+    var golden = Math.PI * (3 - Math.sqrt(5));
+    tags.forEach(function (t, i) {
+      // Spread the tags evenly over the sphere (Fibonacci lattice)
+      var y = 1 - 2 * (i + .5) / tags.length, r = Math.sqrt(1 - y * y), a = i * golden;
+      t.x = Math.cos(a) * r; t.y = y; t.z = Math.sin(a) * r;
+      t.ray = document.createElementNS(NS, "line");
+      t.ray.setAttribute("class", "ray");
+      svg.appendChild(t.ray);
+      t.el = document.createElement("span");
+      t.el.className = "tag" + (t.group ? " is-group" : "");
+      t.el.textContent = t.text;
+    });
+    globe.appendChild(svg);
+    tags.forEach(function (t) { globe.appendChild(t.el); });
+    kit.classList.add("has-globe");
+
+    var W, H, R, FLAT = .66, spin = 0, px = 0, py = 0, tx = 0, ty = 0, live = false;
+    var measure = function () {
+      W = globe.offsetWidth; H = globe.offsetHeight;
+      R = Math.min(W * (W < 640 ? .34 : .25), H * .5, 380);
+      tags.forEach(function (t) { t.w = t.el.offsetWidth; t.h = t.el.offsetHeight; });
+    };
+    var draw = function () {
+      px += (tx - px) * .06; py += (ty - py) * .06;
+      if (!reduceMotion) spin += .0022 + px * .004;
+      var gx = W / 2, gy = H / 2, hx = gx + px * 48, hy = gy + py * 32;
+      var tilt = -.3 + py * .35, ct = Math.cos(tilt), st = Math.sin(tilt), cs = Math.cos(spin), ss = Math.sin(spin);
+      tags.forEach(function (t) {
+        var x = t.x * cs + t.z * ss, z = t.z * cs - t.x * ss;
+        var y = t.y * ct - z * st;
+        z = t.y * st + z * ct;
+        var d = (z + 1) / 2, k = .7 + d * .45;
+        var sx = gx + x * R, sy = gy + y * R * FLAT;
+        t.el.style.transform = "translate(" + (sx - t.w * k / 2).toFixed(1) + "px," + (sy - t.h * k / 2).toFixed(1) + "px) scale(" + k.toFixed(3) + ")";
+        t.el.style.opacity = (.18 + d * .82).toFixed(3);
+        t.el.style.zIndex = Math.round(d * 100);
+        t.ray.setAttribute("x1", hx.toFixed(1)); t.ray.setAttribute("y1", hy.toFixed(1));
+        t.ray.setAttribute("x2", sx.toFixed(1)); t.ray.setAttribute("y2", sy.toFixed(1));
+        t.ray.style.opacity = (.04 + d * .26).toFixed(3);
+      });
+      // Wireframe: the outline, the equator, and three meridians turning with the globe
+      var shapes = [[R, R * FLAT], [R, R * FLAT * Math.abs(st)]];
+      for (var m = 0; m < 3; m++) shapes.push([R * Math.abs(Math.cos(spin + m * Math.PI / 3)), R * FLAT]);
+      wires.forEach(function (el, i) {
+        el.setAttribute("cx", gx); el.setAttribute("cy", gy);
+        el.setAttribute("rx", shapes[i][0].toFixed(1)); el.setAttribute("ry", shapes[i][1].toFixed(1));
+      });
+      if (live) requestAnimationFrame(draw);
+    };
+    measure();
+    draw();
+    window.addEventListener("resize", function () { measure(); draw(); });
+    kit.addEventListener("pointermove", function (e) {
+      var box = globe.getBoundingClientRect();
+      tx = Math.max(-1, Math.min(1, (e.clientX - box.left) / box.width * 2 - 1));
+      ty = Math.max(-1, Math.min(1, (e.clientY - box.top) / box.height * 2 - 1));
+    });
+    kit.addEventListener("pointerleave", function () { tx = ty = 0; });
+    // Only animate while the globe is on screen
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        var was = live;
+        live = entries[0].isIntersecting;
+        if (live && !was) requestAnimationFrame(draw);
+      }).observe(globe);
+    }
+  }
+
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 })();
