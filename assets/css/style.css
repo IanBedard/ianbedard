@@ -275,7 +275,7 @@ section[id] { scroll-margin-top: calc(1.5rem - var(--section)); }
 .hero h1 { max-width: 15ch; margin-bottom: clamp(1.5rem, 4vh, 3rem); }
 .hero-foot { row-gap: 1.5rem; align-items: end; }
 .hero .lead { grid-column: 1 / span 5; margin: 0; font-size: clamp(1.0625rem, 1.3vw, 1.25rem); color: var(--muted); max-width: 44ch; }
-.hero .btn-row { grid-column: 7 / -1; justify-content: flex-end; }
+.hero .btn-row { grid-column: 6 / -1; justify-content: flex-end; }
 .hero-meta { grid-column: 1 / -1; display: flex; align-items: center; gap: .6rem; margin: 0; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: .9375rem; color: var(--muted); }
 .hero-meta .dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; flex: none; }
 @media (max-width: 860px) {
@@ -624,15 +624,27 @@ select.input option { background: var(--ink); color: var(--paper); }
 /* ---------- About page ---------- */
 .site-nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: .3em; }
 
-/* Intro: a big greeting, a first-person paragraph and quick facts */
-.about-hero .breadcrumbs { margin-bottom: clamp(3rem, 8vw, 7rem); }
-.about-hero h1 { font-size: clamp(3.5rem, 13vw, 13rem); line-height: .86; letter-spacing: -.065em; margin-bottom: clamp(2.5rem, 6vw, 5rem); }
-.about-intro { row-gap: 2.5rem; align-items: end; }
-.about-intro .lead { grid-column: 1 / span 7; margin: 0; font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.3; letter-spacing: -.02em; max-width: 34ch; }
+/* Intro: a big greeting, a first-person paragraph and quick facts; sized to fit one window */
+.about-hero { padding: clamp(1.5rem, min(5vw, 4vh), 4rem) 0 clamp(2.5rem, min(8vw, 8vh), 7rem); }
+.about-hero .breadcrumbs { margin-bottom: clamp(1.5rem, min(8vw, 7vh), 7rem); }
+.about-hero h1 { font-size: clamp(3.5rem, min(13vw, 18vh), 13rem); line-height: .86; letter-spacing: -.065em; margin-bottom: clamp(1.5rem, min(6vw, 5vh), 5rem); }
+.about-intro { row-gap: clamp(1.25rem, 3vh, 2.5rem); align-items: start; }
+.about-intro .lead { grid-column: 1 / span 7; margin: 0; font-size: clamp(1.125rem, min(2vw, 3.4vh), 1.75rem); line-height: 1.3; letter-spacing: -.02em; max-width: 34ch; }
 .about-intro .lead .dim { color: var(--muted); }
-.about-intro .case-meta { grid-column: 9 / -1; grid-template-columns: 1fr; margin: 0; }
-.about-intro .btn-row { grid-column: 1 / -1; }
-@media (max-width: 960px) { .about-intro .lead, .about-intro .case-meta { grid-column: 1 / -1; } }
+.about-intro .case-meta { grid-column: 9 / -1; grid-row: 1 / span 2; grid-template-columns: 1fr; gap: clamp(.75rem, 2vh, 1.5rem); margin: 0; }
+.about-intro .case-meta > div { padding-top: clamp(.5rem, 1.4vh, .9rem); }
+.about-intro .btn-row { grid-column: 1 / span 7; }
+@media (max-width: 960px) {
+  .about-intro .lead, .about-intro .case-meta, .about-intro .btn-row { grid-column: 1 / -1; grid-row: auto; }
+}
+
+/* Four projects side by side on wide screens, so the section fits one window */
+@media (min-width: 1100px) {
+  .work-list.projects-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .projects-4 .project h3 { font-size: clamp(1.375rem, min(2vw, 3.6vh), 2.25rem); }
+  .projects-4 .work-body { gap: clamp(.6rem, 1.4vh, .85rem); }
+  .projects-4 .doc-link { padding: .7rem .85rem; }
+}
 
 /* Experience: big start years, a rail that fills as you scroll, and a node per role */
 .timeline { --rail: calc((100% - 11 * var(--col-gap)) / 12 * 4.5 + 4 * var(--col-gap)); position: relative; }

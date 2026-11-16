@@ -7,7 +7,7 @@ Web developer in Ottawa–Gatineau. I build bilingual (English/French), accessib
 - ♿ Built to work with keyboards, screen readers and on every device
 - 🛍️ Shopify stores for businesses ready to sell online
 
-**Website:** [ianbedard.com](https://ianbedard.com) · **About me:** [ianbedard.com/about.html](https://ianbedard.com/about.html) · **CV:** [portfolio.ianbedard.com](https://portfolio.ianbedard.com) · **LinkedIn:** [linkedin.com/in/ianbedard](https://www.linkedin.com/in/ianbedard/)
+**Website:** [ianbedard.com](https://ianbedard.com) · **About me:** [ianbedard.com/about.html](https://ianbedard.com/about.html) · **CV (PDF):** [ianbedard.com/assets/docs/ian-bedard-cv.pdf](https://ianbedard.com/assets/docs/ian-bedard-cv.pdf) · **LinkedIn:** [linkedin.com/in/ianbedard](https://www.linkedin.com/in/ianbedard/)
 
 ## About this site
 
@@ -21,8 +21,8 @@ A static site in plain HTML, CSS and JavaScript, with no build step. Every page 
 
 - `assets/css/style.css`: the whole design (monochrome editorial layout, one typeface, 12-column grid). Spacing follows the window height as well as its width, so each section fits on screen after an anchor jump.
 - `assets/js/main.js`: small enhancements; the site works without it. Mobile menu, contact form, scroll reveals, the scroll scenes on the home page, the About page timeline and the toolkit globe.
-- `assets/docs/`: case-study PDFs linked from the About page.
-- `tools/`: Python scripts that generate the logo and favicon (`build_logo.py`), the case-study pages (`build_case_studies.py`) and the mockup images (`build_mockups.py`).
+- `assets/docs/`: the CV and the case-study PDFs linked from the About page.
+- `tools/`: Python scripts that generate the logo and favicon (`build_logo.py`), the case-study pages (`build_case_studies.py`), the mockup images (`build_mockups.py`) and the CV PDF (`build_cv.py`, which prints `tools/cv/cv.html` with headless Chrome or Edge).
 
 ## Deploying
 

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ian Bédard – CV</title>
+  <!-- Source for assets/docs/ian-bedard-cv.pdf (one Letter page). Edit here, then run: python tools/build_cv.py -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=block">
+  <style>
+    /* Same tokens as assets/css/style.css: near-black and off-white, one grotesk, hairline rules */
+    :root {
+      --ink: #0f0f0f;
+      --paper: #f0f0f0;
+      --bg: var(--paper);
+      --fg: var(--ink);
+      --muted: rgba(15, 15, 15, .72);
+      --dim: rgba(15, 15, 15, .42);
+      --line: rgba(15, 15, 15, .14);
+      --line-strong: rgba(15, 15, 15, .4);
+      --gap: 12px;
+      --pad: .5in;
+      --font: "Inter Tight", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    .dark {
+      --bg: var(--ink);
+      --fg: var(--paper);
+      --muted: rgba(240, 240, 240, .62);
+      --dim: rgba(240, 240, 240, .5);
+      --line: rgba(240, 240, 240, .14);
+      --line-strong: rgba(240, 240, 240, .4);
+    }
+
+    @page { size: letter; margin: 0; }
+    * { box-sizing: border-box; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { margin: 0; background: #888; font-family: var(--font); font-size: 8.75pt; line-height: 1.45; color: var(--fg); -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, p, ul, ol, dl, dd { margin: 0; }
+    h1, h2, h3 { font-weight: 500; }
+    a { color: inherit; text-decoration: none; }
+    .dark, .light { background: var(--bg); color: var(--fg); }
+
+    .page { position: relative; width: 8.5in; height: 11in; overflow: hidden; display: flex; flex-direction: column; background: var(--paper); }
+    @media screen { .page { margin: 24px auto; box-shadow: 0 10px 40px rgba(0, 0, 0, .25); } }
+
+    .caption { font-size: 6.5pt; font-weight: 500; text-transform: uppercase; letter-spacing: .07em; }
+    .muted { color: var(--muted); }
+
+    /* Masthead */
+    .masthead { position: relative; padding: .3in var(--pad) .24in; }
+    .top { display: grid; grid-template-columns: repeat(4, 1fr); color: var(--muted); }
+    .name { margin: .2in 0 .05in; font-size: 30pt; line-height: .9; letter-spacing: -.05em; }
+    .role { font-size: 12pt; line-height: 1.15; letter-spacing: -.02em; color: var(--dim); }
+    .contact { margin-top: .18in; display: grid; grid-template-columns: repeat(4, 1fr); column-gap: var(--gap); }
+        .contact div { border-top: 1px solid var(--line-strong); padding-top: 5px; }
+    .contact dt { color: var(--muted); }
+    .contact dd { margin-top: 2px; font-size: 8.5pt; overflow-wrap: anywhere; }
+
+    /* Body: experience on the left, everything else in a sidebar */
+    .body { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) 2.35in; column-gap: .3in; padding: .22in var(--pad) 0; }
+    .section + .section { margin-top: 22px; }
+    .eyebrow { display: flex; gap: 5px; padding-bottom: 6px; margin-bottom: 10px; border-bottom: 1px solid var(--line-strong); }
+    .eyebrow .index { color: var(--muted); }
+
+    /* Experience: big start year, then the role */
+    .jobs { list-style: none; padding: 0; }
+    .job { display: grid; grid-template-columns: .62in minmax(0, 1fr); column-gap: var(--gap); padding: 7px 0 8px; border-top: 1px solid var(--line); }
+    .job:first-child { border-top: 0; padding-top: 0; }
+    .year { font-size: 16pt; font-weight: 500; line-height: .85; letter-spacing: -.05em; color: var(--dim); }
+    .job.current .year { color: var(--fg); }
+    .meta { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); margin-bottom: 2px; }
+    .now { display: inline-flex; align-items: center; gap: 3px; color: var(--fg); }
+    .now::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: #16a34a; }
+    .role-card h3 { font-size: 11pt; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 2px; }
+    .role-card > p { color: var(--muted); }
+    .plus { list-style: none; padding: 0; margin-top: 4px; }
+    .plus li { display: flex; gap: 6px; padding: 1.5px 0; color: var(--muted); font-size: 8.25pt; line-height: 1.4; }
+    .plus li::before { content: "+"; color: var(--fg); font-weight: 500; }
+
+    /* Sidebar */
+    .items { list-style: none; padding: 0; }
+    .items li { padding: 8px 0 9px; border-top: 1px solid var(--line); }
+    .items li:first-child { border-top: 0; padding-top: 0; }
+    .items h3 { margin-bottom: 3px; color: var(--muted); }
+    .items p { font-size: 9pt; line-height: 1.4; }
+    .items b { font-weight: 500; }
+    .items .small { display: inline-block; margin-top: 1px; font-size: 8pt; line-height: 1.4; color: var(--muted); }
+
+    /* Footer band, like the site footer */
+    .foot { display: flex; justify-content: space-between; align-items: baseline; padding: .14in var(--pad); margin-top: .2in; }
+    .foot .mark { font-size: 11pt; font-weight: 500; letter-spacing: -.03em; }
+    .foot .caption { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header class="masthead dark">
+      <div class="top caption">
+        <span>Curriculum vitae</span>
+        <span>Ottawa–Gatineau</span>
+        <span>English &amp; French</span>
+        <span>WCAG accessibility</span>
+      </div>
+      <h1 class="name">Ian Bédard</h1>
+      <p class="role">Web Administrator building accessible, data-driven web applications.</p>
+      <dl class="contact">
+        <div><dt class="caption">Email</dt><dd><a href="mailto:ian.bedard@hotmail.com">ian.bedard@hotmail.com</a></dd></div>
+        <div><dt class="caption">Website</dt><dd><a href="https://ianbedard.com">ianbedard.com</a></dd></div>
+        <div><dt class="caption">LinkedIn</dt><dd><a href="https://www.linkedin.com/in/ianbedard/">in/ianbedard</a></dd></div>
+        <div><dt class="caption">GitHub</dt><dd><a href="https://github.com/IanBedard">github.com/IanBedard</a></dd></div>
+      </dl>
+    </header>
+
+    <main class="body light">
+      <div>
+        <section class="section">
+          <h2 class="eyebrow caption"><span class="index">(01)</span>Experience</h2>
+          <ol class="jobs">
+            <li class="job">
+              <div class="year" aria-hidden="true">2026</div>
+              <div class="role-card">
+                <p class="meta caption"><span>Jul 2026 – Sep 2026</span><span>Public Services and Procurement Canada</span></p>
+                <h3>Senior Web Developer</h3>
+                <p>Led and coordinated a large-scale web initiative with developers, clients and stakeholders, from approved designs through release.</p>
+                <ul class="plus">
+                  <li>Coordinated delivery of a project spanning 500+ Jira subtasks and 1,600 source files, assigning and prioritizing work, reviewing deliverables and maintaining quality standards.</li>
+                  <li>Guided clients and stakeholders through iterative Figma design reviews to validate requirements and deliver production-ready interfaces.</li>
+                </ul>
+              </div>
+            </li>
+            <li class="job">
+              <div class="year" aria-hidden="true">2022</div>
+              <div class="role-card">
+                <p class="meta caption"><span>Nov 2022 – Mar 2023</span><span>Public Services and Procurement Canada</span></p>
+                <h3>Graphic Designer</h3>
+                <p>Produced accessible interactive forms, graphics and internal digital documents.</p>
+              </div>
+            </li>
+            <li class="job current">
+              <div class="year" aria-hidden="true">2021</div>
+              <div class="role-card">
+                <p class="meta caption"><span>Mar 2021 – <span class="now">Present</span></span><span>Public Services and Procurement Canada</span></p>
+                <h3>Web Administrator</h3>
+                <p>Build and maintain accessible, component-based web applications and automated content workflows for Government of Canada services.</p>
+                <ul class="plus">
+                  <li>Build responsive front ends with React, JavaScript, HTML, CSS and GC Design System components.</li>
+                  <li>Refactor legacy jQuery into reusable React components and modular JavaScript while maintaining WCAG 2.1 conformance.</li>
+                  <li>Develop accessible, searchable data tables and automated JSON transformation workflows for high-volume content.</li>
+                  <li>Translate client requirements into technical specifications, acceptance criteria and accessibility test scenarios.</li>
+                  <li>Ship release-ready code through Git, Bitbucket, Jira, peer review and Agile delivery practices.</li>
+                </ul>
+              </div>
+            </li>
+            <li class="job">
+              <div class="year" aria-hidden="true">2020</div>
+              <div class="role-card">
+                <p class="meta caption"><span>Jan 2020 – Mar 2021</span><span>Public Services and Procurement Canada</span></p>
+                <h3>Web Developer</h3>
+                <p>Developed publishing and accessibility tooling for internal web content workflows.</p>
+                <ul class="plus">
+                  <li>Automated content workflows for accessibility verification and publishing preparation.</li>
+                  <li>Delivered work through CI/CD pipelines, Bitbucket and Agile team workflows.</li>
+                </ul>
+              </div>
+            </li>
+            <li class="job">
+              <div class="year" aria-hidden="true">2019</div>
+              <div class="role-card">
+                <p class="meta caption"><span>Jun 2019 – Aug 2019</span><span>Canadian Radio-television and Telecommunications Commission</span></p>
+                <h3>Web Developer</h3>
+                <p>Supported accessible web publishing and digital content delivery in a federal environment.</p>
+              </div>
+            </li>
+            <li class="job">
+              <div class="year" aria-hidden="true">2017</div>
+              <div class="role-card">
+                <p class="meta caption"><span>Sep 2017 – Dec 2017</span><span>Freelance</span></p>
+                <h3>WordPress Developer</h3>
+                <p>Delivered WordPress updates for small-business clients, including deniselevesque.ca.</p>
+              </div>
+            </li>
+          </ol>
+        </section>
+      </div>
+
+      <aside>
+        <section class="section">
+          <h2 class="eyebrow caption"><span class="index">(02)</span>Toolkit</h2>
+          <ul class="items">
+            <li><h3 class="caption">Frontend</h3><p>React · JavaScript · TypeScript · HTML · CSS · jQuery</p></li>
+            <li><h3 class="caption">Backend &amp; data</h3><p>Node.js · Python · PHP · SQL · JSON</p></li>
+            <li><h3 class="caption">Quality &amp; workflow</h3><p>WCAG 2.1 · Git · Bitbucket · Jira · Docker · Agile</p></li>
+            <li><h3 class="caption">Design</h3><p>Figma · Photoshop · Illustrator · InDesign</p></li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2 class="eyebrow caption"><span class="index">(03)</span>Education &amp; credentials</h2>
+          <ul class="items">
+            <li><h3 class="caption">Education · 2017 – 2020</h3><p><b>DEC in Multimedia</b><br><span class="small">Cégep de l’Outaouais</span></p></li>
+            <li><h3 class="caption">Languages</h3><p><b>English and French</b><br><span class="small">Second-language evaluation: CCC</span></p></li>
+            <li><h3 class="caption">Microsoft · AZ-900</h3><p><a href="https://learn.microsoft.com/en-us/users/ianbedard-9945/credentials/ad87234f10b04123"><b>Azure Fundamentals</b> ↗</a></p></li>
+            <li><h3 class="caption">Microsoft · SC-900</h3><p><a href="https://learn.microsoft.com/en-us/users/ianbedard-9945/credentials/45089290fb382960"><b>Security, Compliance &amp; Identity Fundamentals</b> ↗</a></p></li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2 class="eyebrow caption"><span class="index">(04)</span>Selected projects</h2>
+          <ul class="items">
+            <li><h3 class="caption">React · GCDS</h3><p><a href="https://webteam-statsboard.netlify.app/"><b>Web Team Statistics Hub</b> ↗</a><br><span class="small">Jira ticket reporting with volume and month-by-month comparisons.</span></p></li>
+            <li><h3 class="caption">JavaScript</h3><p><a href="https://converter-studio.netlify.app/"><b>Converter Studio</b> ↗</a><br><span class="small">Turns bulky Excel and Word content into clean web formats.</span></p></li>
+            <li><h3 class="caption">Modernization</h3><p><b>Benefit Letter Migration</b><br><span class="small">A legacy site moved to a modern, accessible web app.</span></p></li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+
+    <footer class="foot dark">
+      <span class="mark">Ian Bédard</span>
+      <span class="caption">ianbedard.com · ian.bedard@hotmail.com</span>
+    </footer>
+  </article>
+</body>
+</html>
