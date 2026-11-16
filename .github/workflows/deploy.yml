@@ -13,14 +13,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Give the stylesheet, script and logo a new URL on every deploy, so Cloudflare
+      # Give the stylesheet, script, logo and PDFs a new URL on every deploy, so Cloudflare
       # and browsers never keep serving an old cached copy
       - name: Stamp asset URLs with the commit
         run: |
           v="${GITHUB_SHA::7}"
           find . -name "*.html" -not -path "./.git/*" -print0 \
-            | xargs -0 sed -i -E "s#(assets/(css/style\.css|js/main\.js|img/logo-mark\.svg|img/favicon\.svg))\"#\1?v=${v}\"#g"
-          grep -rhoE "assets/(css/style\.css|js/main\.js|img/logo-mark\.svg|img/favicon\.svg)\?v=[0-9a-f]+" --include=*.html . | sort | uniq -c
+            | xargs -0 sed -i -E "s#(assets/(css/style\.css|js/main\.js|img/logo-mark\.svg|img/favicon\.svg|docs/[a-z0-9-]+\.pdf))\"#\1?v=${v}\"#g"
+          grep -rhoE "assets/(css/style\.css|js/main\.js|img/logo-mark\.svg|img/favicon\.svg|docs/[a-z0-9-]+\.pdf)\?v=[0-9a-f]+" --include=*.html . | sort | uniq -c
 
       - name: Deploy site to Hostinger
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
