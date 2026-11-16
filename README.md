@@ -26,4 +26,4 @@ A static site in plain HTML, CSS and JavaScript, with no build step. Every page 
 
 ## Deploying
 
-Pushing to `main` deploys to Hostinger through GitHub Actions (`.github/workflows/deploy.yml`). The workflow adds the commit hash to the stylesheet, script and logo URLs, so browsers and Cloudflare never serve an old cached copy.
+Pushing to `main` deploys to Hostinger through GitHub Actions (`.github/workflows/deploy.yml`). The workflow adds the commit hash to the stylesheet, script, logo and PDF URLs, so browsers and Cloudflare never serve an old cached copy.
