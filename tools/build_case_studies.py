@@ -148,10 +148,11 @@ P = [
 
 T = dict(
   en=dict(lang="en", other="fr", home="../index.html", work_anchor="#work", nav="Main",
-    other_label="FR", skip="Skip to main content", crumbs_home="Home", crumbs_work="My work",
-    concept="Concept project", live="Live demo", type_l="Type", client_l="Business", scope_l="Package",
-    explore_h="Explore the live store", explore_p="This is the real site, captured from the live demo. Scroll inside the frames to browse it.",
-    scroll_hint="Tip: scroll inside the frames to look around the store.", desk="Desktop", mob="Mobile",
+    other_label="FR", skip="Skip to main content", crumbs_home="Home", crumbs_work="Client work", crumbs_concepts="Concept projects",
+    concept_note="This is a demo I built to show what’s possible. It isn’t a client store.",
+    concept="Concept project", demo_tag="Demo", live="Live demo", type_l="Type", client_l="Business", scope_l="Package",
+    explore_h="Explore the live store", explore_p="This is the real site, captured from the live demo. Click a frame, then scroll inside it to browse.",
+    scroll_hint="Tip: click a frame to scroll through the store. Move your mouse away and the page scrolls normally again.", desk="Desktop", mob="Mobile",
     shots_h="Screenshots", shots_p="Desktop and mobile views of the concept design.",
     goal_h="The goal", built_h="What I built", details_h="Details",
     results_h="Results",
@@ -169,10 +170,11 @@ T = dict(
     compare_h="Before and after", compare_p="The same artist, the same paintings, the same WordPress, made calm, clear and bilingual.",
     mob_after="After, on a phone"),
   fr=dict(lang="fr", other="en", home="../index.html", work_anchor="#realisations", nav="Principal",
-    other_label="EN", skip="Passer au contenu principal", crumbs_home="Accueil", crumbs_work="Réalisations",
-    concept="Projet conceptuel", live="Démo en ligne", type_l="Type", client_l="Entreprise", scope_l="Forfait",
-    explore_h="Explorez la boutique en ligne", explore_p="Voici le vrai site, capturé à partir de la démo en ligne. Faites défiler l’intérieur des cadres pour le parcourir.",
-    scroll_hint="Astuce : faites défiler l’intérieur des cadres pour parcourir la boutique.", desk="Ordinateur", mob="Mobile",
+    other_label="EN", skip="Passer au contenu principal", crumbs_home="Accueil", crumbs_work="Projets clients", crumbs_concepts="Projets conceptuels",
+    concept_note="Il s’agit d’une démo que j’ai créée pour montrer ce qui est possible. Ce n’est pas une boutique de client.",
+    concept="Projet conceptuel", demo_tag="Démo", live="Démo en ligne", type_l="Type", client_l="Entreprise", scope_l="Forfait",
+    explore_h="Explorez la boutique en ligne", explore_p="Voici le vrai site, capturé à partir de la démo en ligne. Cliquez sur un cadre, puis faites-le défiler pour le parcourir.",
+    scroll_hint="Astuce : cliquez sur un cadre pour parcourir la boutique. Éloignez la souris et la page défile normalement.", desk="Ordinateur", mob="Mobile",
     shots_h="Captures d’écran", shots_p="Vues ordinateur et mobile de la maquette conceptuelle.",
     goal_h="L’objectif", built_h="Ce que j’ai réalisé", details_h="Détails",
     results_h="Résultats",
@@ -222,14 +224,14 @@ def hero(p, t, c):
     else:
         actions = (f'<a class="btn btn-primary" href="{t["home"]}#contact">{t["demo_btn"]}</a>\n'
                    f'          </div>\n          <p class="demo-pass">{t["demo_p"]}</p>')
-    return f"""    <section class="case-hero deep waves-bottom" data-waves="bottom" aria-labelledby="case-title">
+    return f"""    <section class="case-hero dark" aria-labelledby="case-title">
       <div class="container">
-        <nav class="breadcrumbs" aria-label="Breadcrumb">
-          <a href="{t['home']}">{t['crumbs_home']}</a> / <a href="{t['home']}{t['work_anchor']}">{t['crumbs_work']}</a> / <span aria-current="page">{p['name']}</span>
+        <nav class="breadcrumbs caption" aria-label="Breadcrumb">
+          <a href="{t['home']}">{t['crumbs_home']}</a> / <a href="{t['home']}{t['work_anchor'] if p.get('client_project') else '#concepts'}">{t['crumbs_work'] if p.get('client_project') else t['crumbs_concepts']}</a> / <span aria-current="page">{p['name']}</span>
         </nav>
         <div class="badges">{badges}</div>
         <h1 id="case-title">{p['name']}</h1>
-        <p class="lead">{c['intro']}</p>
+        <p class="lead">{c['intro']}</p>{'' if p.get('client_project') else chr(10) + '        <p class="concept-note"><span class="badge badge-demo">' + t['demo_tag'] + '</span>' + t['concept_note'] + '</p>'}
         <dl class="case-meta">
           <div><dt>{t['type_l']}</dt><dd>{c['type']}</dd></div>
           <div><dt>{c.get('client_l', t['client_l'])}</dt><dd>{c['client']}</dd></div>
@@ -246,7 +248,7 @@ def compare(p, t, c, a):
     before = browser(k["before_url"], f'<div class="screen"><img src="{img}{k["before"]}" alt="" width="{k["before_w"]}" height="{k["before_w"] * 10 // 16}" loading="lazy"></div>')
     after = browser(k["after_url"], f'<div class="screen"><img src="{img}{k["after"]}" alt="" width="{k["after_w"]}" height="{k["after_w"] * 10 // 16}" loading="lazy"></div>')
     phone = f'<div class="mockup-phone"><div class="screen"><img src="{img}{k["mobile"]}" alt="" width="{k["mobile_w"]}" loading="lazy"></div></div>'
-    return f"""    <section class="bg-base-200 section-tight" aria-labelledby="explore-title">
+    return f"""    <section class="light section-tight" aria-labelledby="explore-title">
       <div class="container">
         <div class="section-head">
           <h2 id="explore-title">{t['compare_h']}</h2>
@@ -286,7 +288,7 @@ def showcase(p, t, a):
         desk = browser(p["url"], f'<div class="screen"><img src="{img}-desktop.svg" alt="" width="1200" height="716"></div>')
         phone = f'<div class="mockup-phone"><div class="screen"><img src="{img}-mobile.svg" alt="" width="366" height="776"></div></div>'
         head, sub, hint = t["shots_h"], t["shots_p"], ""
-    return f"""    <section class="bg-base-200 section-tight" aria-labelledby="explore-title">
+    return f"""    <section class="light section-tight" aria-labelledby="explore-title">
       <div class="container">
         <div class="section-head">
           <h2 id="explore-title">{head}</h2>
@@ -346,11 +348,13 @@ def page(i, lang):
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{p['name']}: {t['title_suffix']}</title>
   <meta name="description" content="{c['intro']}">
-  <meta name="theme-color" content="#22102c">
+  <meta name="theme-color" content="#0f0f0f">
   <link rel="alternate" hreflang="{t['lang']}" href="{p['slug']}.html">
   <link rel="alternate" hreflang="{t['other']}" href="{other_href}">
   <link rel="icon" href="{a}assets/img/logo-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="https://use.typekit.net/vqa6miq.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&display=swap">
   <link rel="stylesheet" href="{a}assets/css/style.css">
 </head>
 <body>
@@ -358,7 +362,7 @@ def page(i, lang):
 
   <header class="navbar">
     <div class="container navbar-inner">
-      <a class="logo" href="{t['home']}"><img class="logo-mark" src="{a}assets/img/logo-mark.svg" alt="" width="36" height="36">Ian Bédard</a>
+      <a class="logo" href="{t['home']}"><img class="logo-mark" src="{a}assets/img/logo-mark.svg" alt="" width="26" height="26">Ian Bédard</a>
       <nav class="site-nav case-nav" aria-label="{t['nav']}">
         <ul>
           <li><a class="lang-switch" href="{other_href}" lang="{t['other']}" hreflang="{t['other']}">{t['other_label']}</a></li>
@@ -373,7 +377,7 @@ def page(i, lang):
 
 {showcase(p, t, a)}
 
-    <section class="section-tight">
+    <section class="light section-tight">
       <div class="container">
         <div class="split">
           <div class="card"><div class="card-body">
@@ -390,7 +394,7 @@ def page(i, lang):
       </div>
     </section>
 
-    <section class="bg-base-200 section-tight" aria-labelledby="details-title">
+    <section class="light section-tight" aria-labelledby="details-title">
       <div class="container">
         <div class="section-head"><h2 id="details-title">{t['details_h']}</h2></div>
         <div class="shots">
@@ -399,12 +403,12 @@ def page(i, lang):
       </div>
     </section>
 
-    <section class="section-tight" aria-labelledby="results-title">
+    <section class="light section-tight" aria-labelledby="results-title">
       <div class="container">
         <div class="section-head"><h2 id="results-title">{t['results_h']}</h2></div>
         {results}
 
-        <div class="cta-box deep" data-waves="both" data-waves-lines="10">
+        <div class="cta-box dark">
           <div>
             <h2>{cta_h}</h2>
             <p>{t['cta_p']}</p>
@@ -414,32 +418,35 @@ def page(i, lang):
           </div>
         </div>
 
-        <p class="next-project"><a href="{nxt['slug']}.html">{t['next']}: {nxt['name']} →</a></p>
+        <div class="next-wrap">
+          <p class="caption muted">{t['next']}</p>
+          <p class="next-project"><a href="{nxt['slug']}.html"><span>{nxt['name']}</span><span aria-hidden="true">→</span></a></p>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container">
-      <div class="footer-grid">
+      <div class="footer-grid grid">
         <div>
-          <a class="logo" href="{t['home']}"><img class="logo-mark" src="{a}assets/img/logo-mark.svg" alt="" width="36" height="36">Ian Bédard</a>
+          <a class="logo" href="{t['home']}"><img class="logo-mark" src="{a}assets/img/logo-mark.svg" alt="" width="26" height="26">Ian Bédard</a>
           <p>{t['footer']}</p>
         </div>
         <div>
-          <div class="footer-title">Contact</div>
+          <div class="footer-title caption">Contact</div>
           <ul>
             <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
             <li><a href="{LINKEDIN}" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden">{t['newtab']}</span></a></li>
           </ul>
         </div>
       </div>
-      <div class="footer-bottom"><span>© <span id="year">2026</span> Ian Bédard</span><span>Ottawa–Gatineau</span></div>
+      <p class="wordmark" aria-hidden="true">Ian Bédard</p>
+      <div class="footer-bottom caption"><span>© <span id="year">2026</span> Ian Bédard</span><span>Ottawa–Gatineau</span></div>
     </div>
   </footer>
 
   <script src="{a}assets/js/main.js"></script>
-  <script src="{a}assets/js/waves.js"></script>
 </body>
 </html>
 """

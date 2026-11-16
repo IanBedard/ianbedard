@@ -74,6 +74,256 @@
     });
   }
 
+  // Fade sections up as they scroll into view (skipped for reduced motion; content is visible without JS)
+  var reveals = document.querySelectorAll(".reveal");
+  if (reveals.length && "IntersectionObserver" in window &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("js-reveal");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    reveals.forEach(function (el) { io.observe(el); });
+  }
+
+  // Scrollable demo frames stay locked until clicked, so scrolling the page over them doesn't scroll the demo
+  document.querySelectorAll(".screen.scroll").forEach(function (frame) {
+    var box = frame.parentNode;
+    var hint = document.createElement("span");
+    hint.className = "frame-hint";
+    hint.setAttribute("aria-hidden", "true");
+    hint.innerHTML = '<span class="frame-hint-inner"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M9 9l5 12 1.8-5.2L21 14 9 9z"/><path d="M7.2 2.2L8 5.1M5.1 8l-2.9-.8M14 4.1l-2.1 2.1M6.2 11.9l-2.1 2.1"/></svg>' +
+      "<span>" + (fr ? "Cliquez pour parcourir" : "Click to scroll") + "</span></span>";
+    box.appendChild(hint);
+    var lock = function () { frame.classList.add("is-locked"); box.classList.remove("is-active"); };
+    var unlock = function () { frame.classList.remove("is-locked"); box.classList.add("is-active"); };
+    lock();
+    box.addEventListener("click", function () { if (!box.classList.contains("is-active")) { unlock(); frame.focus({ preventScroll: true }); } });
+    frame.addEventListener("focus", unlock);
+    frame.addEventListener("blur", lock);
+    box.addEventListener("mouseleave", function () { lock(); frame.blur(); });
+    frame.addEventListener("keydown", function (e) { if (e.key === "Escape") lock(); });
+  });
+
+  // Scroll-driven scenes: the pinned philosophy sequence and the steps slider.
+  // Skipped entirely for reduced motion; without JS the philosophy section stays hidden and the steps show as a list.
+  var philo = document.querySelector(".philo");
+  if ((philo || document.querySelector(".steps")) && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+    var range = function (p, a, b) { return clamp((p - a) / (b - a)); };
+    var ease = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+
+    var stage, pieces, dark, rule, closing, closingWords, from = [], to = [];
+    if (philo) {
+      document.documentElement.classList.add("js-philo");
+      stage = philo.querySelector(".philo-stage");
+      pieces = philo.querySelectorAll(".philo-a span");
+      dark = philo.querySelector(".philo-dark");
+      rule = philo.querySelector(".philo-rule");
+      closing = philo.querySelector(".philo-c");
+      // Split the closing line into words so they can darken one after another
+      closingWords = closing.textContent.trim().split(/\s+/);
+      closing.innerHTML = closingWords.map(function (w) { return "<span>" + w + "</span>"; }).join(" ");
+      closingWords = closing.querySelectorAll("span");
+
+      // Start: the lead phrase at the first column, the other words at the last three columns.
+      // End: one sentence, centred (on two lines if it doesn't fit).
+      var layout = function () {
+        var cols = philo.querySelectorAll(".philo-lines span");
+        var sw = stage.offsetWidth, pad = 10;
+        var space = parseFloat(getComputedStyle(pieces[0]).fontSize) * .26;
+        var widths = Array.prototype.map.call(pieces, function (el) { return el.offsetWidth; });
+        var total = widths.reduce(function (a, b) { return a + b; }) + space * (widths.length - 1);
+        var lh = pieces[0].offsetHeight;
+        var oneLine = total < sw - 2 * cols[0].offsetLeft;
+        var narrow = sw < 640;
+        var rest = total - widths[0] - space;
+        var x = oneLine ? (sw - total) / 2 : (sw - rest) / 2;
+        Array.prototype.forEach.call(pieces, function (el, i) {
+          // Narrow screens: lead phrase on its own row, the other words on alternate columns below
+          from[i] = narrow
+            ? { x: cols[i === 0 ? 0 : (i - 1) * 2].offsetLeft + pad, y: i === 0 ? -lh * .8 : lh * .8 }
+            : { x: i === 0 ? cols[0].offsetLeft + pad : cols[cols.length - 4 + i].offsetLeft + pad, y: 0 };
+          if (i === 0 && !oneLine) {
+            to[i] = { x: (sw - widths[0]) / 2, y: -lh / 2 };
+          } else {
+            to[i] = { x: x, y: oneLine ? 0 : lh / 2 };
+            x += widths[i] + space;
+          }
+        });
+      };
+      layout();
+      window.addEventListener("resize", layout);
+      // Re-measure once the web font has loaded, since word widths change
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { layout(); onScroll(); });
+    }
+
+    // Steps slider: built from the real step list, which stays in the page for screen readers
+    var stepList = document.querySelector(".steps");
+    var pin, stepTitles, stepDescs, stepLayers, stepCount, stepSpacing = 0;
+    if (stepList) {
+      var items = stepList.querySelectorAll("li");
+      var pad2 = function (n) { return (n < 10 ? "0" : "") + n; };
+      var titles = "", descs = "", layers = "";
+      Array.prototype.forEach.call(items, function (li, i) {
+        titles += "<span>" + li.querySelector("h3").textContent + "</span>";
+        descs += "<p>" + li.querySelector("p").textContent + "</p>";
+        layers += '<div class="steps-layer"><span class="caption">' + li.querySelector("h3").textContent + "</span><b>" + pad2(i + 1) + "</b></div>";
+      });
+      pin = document.createElement("div");
+      pin.className = "steps-pin";
+      pin.setAttribute("aria-hidden", "true");
+      pin.style.height = (items.length * 70 + 100) + "vh";
+      pin.innerHTML = '<div class="steps-stage"><div class="steps-titles">' + titles + "</div>" +
+        '<div class="steps-desc">' + descs + '</div><div class="steps-card">' + layers + "</div>" +
+        '<div class="steps-count caption"><span>01</span> / ' + pad2(items.length) + "</div></div>";
+      stepList.parentNode.insertBefore(pin, stepList.nextSibling);
+      document.documentElement.classList.add("js-steps");
+      stepTitles = pin.querySelectorAll(".steps-titles span");
+      stepDescs = pin.querySelectorAll(".steps-desc p");
+      stepLayers = pin.querySelectorAll(".steps-layer");
+      stepCount = pin.querySelector(".steps-count span");
+      var measure = function () {
+        var widest = 0;
+        Array.prototype.forEach.call(stepTitles, function (el) { widest = Math.max(widest, el.offsetWidth); });
+        stepSpacing = Math.max(widest, pin.querySelector(".steps-card").offsetWidth) + 56;
+      };
+      measure();
+      window.addEventListener("resize", measure);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); onScroll(); });
+    }
+
+    var ticking = false;
+    var update = function () {
+      ticking = false;
+      var vh = window.innerHeight;
+
+      if (philo) {
+        var r = philo.getBoundingClientRect();
+        var p = clamp(-r.top / (r.height - stage.offsetHeight));
+        // 1. The words slide together into one sentence
+        var k = ease(range(p, .1, .32));
+        Array.prototype.forEach.call(pieces, function (el, i) {
+          var x = from[i].x + (to[i].x - from[i].x) * k, y = from[i].y + (to[i].y - from[i].y) * k;
+          el.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) translateY(-50%)";
+          el.style.visibility = p < .47 ? "visible" : "hidden";
+        });
+        // 2. Black opens from the centre line, then 3. squeezes back into a line and disappears
+        var inset = 50 * (1 - ease(range(p, .34, .46))) + 50 * ease(range(p, .58, .7));
+        dark.style.clipPath = "inset(" + inset.toFixed(2) + "% 0)";
+        dark.firstElementChild.style.opacity = range(p, .42, .48).toFixed(3);
+        rule.style.opacity = (range(p, .66, .7) * (1 - range(p, .72, .78))).toFixed(3);
+        rule.style.transform = "scaleX(" + (1 - .6 * range(p, .72, .78)).toFixed(3) + ")";
+        // 4. The closing line fades in word by word, grey to black
+        closing.style.opacity = range(p, .74, .78).toFixed(3);
+        var n = closingWords.length;
+        Array.prototype.forEach.call(closingWords, function (el, i) {
+          var a = .76 + .18 * i / n;
+          el.style.opacity = (.16 + .84 * range(p, a, a + .06)).toFixed(3);
+        });
+      }
+
+      if (pin) {
+        var pr = pin.getBoundingClientRect();
+        var sp = clamp(-pr.top / (pr.height - pin.firstChild.offsetHeight));
+        // Hold on each step, then move to the next one
+        var raw = sp * (stepTitles.length - 1), idx = Math.min(Math.floor(raw), stepTitles.length - 2);
+        var f = idx + ease(range(raw - idx, .2, .8));
+        Array.prototype.forEach.call(stepTitles, function (el, k) {
+          var d = k - f;
+          el.style.transform = "translateX(" + (d * stepSpacing).toFixed(1) + "px)";
+          el.style.opacity = (1 - Math.min(1, Math.abs(d)) * .74).toFixed(3);
+        });
+        Array.prototype.forEach.call(stepDescs, function (el, k) {
+          var d = k - f;
+          el.style.opacity = Math.max(0, 1 - Math.abs(d) * 2.2).toFixed(3);
+          el.style.transform = "translateY(" + (d * 14).toFixed(1) + "px)";
+        });
+        // Each new card wipes in from the right over the previous one
+        Array.prototype.forEach.call(stepLayers, function (el, k) {
+          if (k) el.style.clipPath = "inset(0 0 0 " + ((1 - clamp(f - k + 1)) * 100).toFixed(2) + "%)";
+        });
+        var cur = pad2(Math.round(f) + 1);
+        if (stepCount.textContent !== cur) stepCount.textContent = cur;
+      }
+    };
+    var onScroll = function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  }
+
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  // Smooth wheel scrolling: the page eases towards where the wheel says it should be.
+  // Keyboard, scrollbar, anchors and touch stay native; anything scrollable under the mouse scrolls itself.
+  if (!reduceMotion && finePointer) {
+    var root = document.scrollingElement || document.documentElement;
+    var target = window.scrollY, current = target, frame = null;
+    var canScroll = function (el, dy) {
+      for (; el && el !== document.body && el !== root; el = el.parentElement) {
+        var oy = getComputedStyle(el).overflowY;
+        if ((oy === "auto" || oy === "scroll") && el.scrollHeight > el.clientHeight + 1) {
+          if (dy > 0 ? el.scrollTop + el.clientHeight < el.scrollHeight - 1 : el.scrollTop > 0) return true;
+        }
+      }
+      return false;
+    };
+    var step = function () {
+      current += (target - current) * .1;
+      if (Math.abs(target - current) < .5) { current = target; frame = null; } else { frame = requestAnimationFrame(step); }
+      window.scrollTo({ top: current, behavior: "instant" });
+    };
+    window.addEventListener("wheel", function (e) {
+      if (e.ctrlKey || Math.abs(e.deltaX) > Math.abs(e.deltaY) || canScroll(e.target, e.deltaY)) return;
+      e.preventDefault();
+      var dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? window.innerHeight : 1);
+      if (!frame) current = target = window.scrollY;
+      target = Math.max(0, Math.min(root.scrollHeight - window.innerHeight, target + dy));
+      if (!frame) frame = requestAnimationFrame(step);
+    }, { passive: false });
+    // Keep in step with scrolling we didn't cause (keyboard, anchor links, scrollbar)
+    window.addEventListener("scroll", function () { if (!frame) current = target = window.scrollY; }, { passive: true });
+  }
+
+  // Subtle custom cursor: a small dot that inverts what's under it and grows over things you can click
+  if (finePointer) {
+    var dot = document.createElement("div");
+    dot.className = "cursor";
+    dot.setAttribute("aria-hidden", "true");
+    document.body.appendChild(dot);
+    document.documentElement.classList.add("has-cursor");
+    var mx = -100, my = -100, cx = mx, cy = my, moving = false;
+    var hoverables = "a, button, summary, label, select, [role='button'], .mockup-browser, .mockup-phone";
+    var render = function () {
+      cx += (mx - cx) * (reduceMotion ? 1 : .3);
+      cy += (my - cy) * (reduceMotion ? 1 : .3);
+      dot.style.transform = "translate3d(" + cx.toFixed(1) + "px," + cy.toFixed(1) + "px,0)";
+      moving = Math.abs(mx - cx) > .1 || Math.abs(my - cy) > .1;
+      if (moving) requestAnimationFrame(render);
+    };
+    document.addEventListener("mousemove", function (e) {
+      mx = e.clientX; my = e.clientY;
+      dot.classList.add("is-visible");
+      var t = e.target;
+      dot.classList.toggle("is-text", !!t.closest("input, textarea"));
+      dot.classList.toggle("is-link", !t.closest("input, textarea") && !!t.closest(hoverables) &&
+        !t.closest(".is-active"));
+      if (!moving) { moving = true; requestAnimationFrame(render); }
+    });
+    document.addEventListener("mouseleave", function () { dot.classList.remove("is-visible"); });
+    document.addEventListener("mousedown", function () { dot.classList.add("is-down"); });
+    document.addEventListener("mouseup", function () { dot.classList.remove("is-down"); });
+  }
+
   var year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 })();
