@@ -38,8 +38,19 @@
   var form = document.getElementById("contact-form");
   if (form) {
     var status = document.getElementById("form-status");
+    var loadedAt = Date.now();
+    var thanks = fr
+      ? "Merci! Je vous réponds d’ici un jour ouvrable."
+      : "Thanks! I’ll reply within 1 business day.";
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+      // Bots submit instantly or fill the hidden honeypot: pretend it worked and send nothing
+      if (Date.now() - loadedAt < 3000 || form.elements._gotcha.value) {
+        form.reset();
+        status.className = "form-status ok";
+        status.textContent = thanks;
+        return;
+      }
       if (form.action.indexOf("YOUR_FORM_ID") !== -1) {
         status.className = "form-status err";
         status.textContent = fr
@@ -60,9 +71,7 @@
           if (!res.ok) throw new Error(res.status);
           form.reset();
           status.className = "form-status ok";
-          status.textContent = fr
-            ? "Merci! Je vous réponds d’ici un jour ouvrable."
-            : "Thanks! I’ll reply within 1 business day.";
+          status.textContent = thanks;
         })
         .catch(function () {
           status.className = "form-status err";

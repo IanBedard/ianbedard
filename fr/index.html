@@ -338,7 +338,7 @@
         </div>
         <div class="contact-grid">
           <div class="form-card reveal">
-            <form id="contact-form" class="form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <form id="contact-form" class="form" action="https://formspree.io/f/xoedeonn" method="POST">
               <div class="field">
                 <label for="name">Nom</label>
                 <input class="input" id="name" name="name" type="text" autocomplete="name" required>
@@ -374,6 +374,12 @@
                 <textarea class="input" id="message" name="message" required></textarea>
               </div>
               <input type="hidden" name="_language" value="fr">
+              <input type="hidden" name="_subject" value="Nouvelle demande de projet via ianbedard.com">
+              <!-- Honeypot: hidden from people, bots fill it in and Formspree drops the submission -->
+              <div class="visually-hidden" aria-hidden="true">
+                <label for="website">Website</label>
+                <input id="website" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+              </div>
               <div class="full"><button class="btn btn-primary" type="submit">Envoyer</button></div>
               <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
             </form>
