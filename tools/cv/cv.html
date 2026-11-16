@@ -47,33 +47,41 @@
     .caption { font-size: 6.5pt; font-weight: 500; text-transform: uppercase; letter-spacing: .07em; }
     .muted { color: var(--muted); }
 
-    /* Masthead */
-    .masthead { position: relative; padding: .3in var(--pad) .24in; }
-    .top { display: grid; grid-template-columns: repeat(4, 1fr); color: var(--muted); }
-    .name { margin: .2in 0 .05in; font-size: 30pt; line-height: .9; letter-spacing: -.05em; }
-    .role { font-size: 12pt; line-height: 1.15; letter-spacing: -.02em; color: var(--dim); }
-    .contact { margin-top: .18in; display: grid; grid-template-columns: repeat(4, 1fr); column-gap: var(--gap); }
-        .contact div { border-top: 1px solid var(--line-strong); padding-top: 5px; }
-    .contact dt { color: var(--muted); }
-    .contact dd { margin-top: 2px; font-size: 8.5pt; overflow-wrap: anywhere; }
+    /* One 12-column grid for the whole page: experience takes columns 1-8 (start year in column 1),
+       the sidebar, the contact list and the footer details take columns 9-12 */
+    .grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); }
+    .main { grid-column: 1 / span 8; }
+    .side { grid-column: 9 / -1; }
 
-    /* Body: experience on the left, everything else in a sidebar */
-    .body { flex: 1; display: grid; grid-template-columns: minmax(0, 1fr) 2.35in; column-gap: .3in; padding: .22in var(--pad) 0; }
+    /* Masthead */
+    .masthead { padding: .3in var(--pad) .26in; row-gap: 0; align-items: end; }
+    .top { grid-row: 1; color: var(--muted); margin-bottom: .2in; }
+    .name { grid-column: 1 / span 8; grid-row: 2; font-size: 30pt; line-height: .9; letter-spacing: -.05em; }
+    .role { grid-column: 1 / span 8; grid-row: 3; margin-top: .06in; font-size: 12pt; line-height: 1.15; letter-spacing: -.02em; color: var(--dim); }
+    .contact { grid-column: 9 / -1; grid-row: 2 / span 2; border-bottom: 1px solid var(--line-strong); }
+    .contact div { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: var(--gap); align-items: baseline; padding: 3px 0; border-top: 1px solid var(--line-strong); }
+    .contact dt { color: var(--muted); }
+    .contact dd { grid-column: 2 / -1; font-size: 8.5pt; overflow-wrap: anywhere; }
+
+    /* Body */
+    .body { flex: 1; padding: .24in var(--pad) 0; align-items: start; }
     .section + .section { margin-top: 22px; }
     .eyebrow { display: flex; gap: 5px; padding-bottom: 6px; margin-bottom: 10px; border-bottom: 1px solid var(--line-strong); }
     .eyebrow .index { color: var(--muted); }
 
-    /* Experience: big start year, then the role */
+    /* Experience: the same 8 columns as the main area. Year | title ... dates, then organization and details */
     .jobs { list-style: none; padding: 0; }
-    .job { display: grid; grid-template-columns: .62in minmax(0, 1fr); column-gap: var(--gap); padding: 7px 0 8px; border-top: 1px solid var(--line); }
+    .job { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: var(--gap); align-items: baseline; padding: 8px 0 9px; border-top: 1px solid var(--line); }
     .job:first-child { border-top: 0; padding-top: 0; }
-    .year { font-size: 16pt; font-weight: 500; line-height: .85; letter-spacing: -.05em; color: var(--dim); }
+    .year { grid-column: 1; grid-row: 1 / span 2; font-size: 15pt; font-weight: 500; line-height: .85; letter-spacing: -.05em; color: var(--dim); }
     .job.current .year { color: var(--fg); }
-    .meta { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); margin-bottom: 2px; }
+    .title { grid-column: 2 / span 4; grid-row: 1; font-size: 11pt; letter-spacing: -.02em; line-height: 1.1; }
+    .when { grid-column: 6 / -1; grid-row: 1; text-align: right; color: var(--muted); }
+    .org { grid-column: 2 / -1; grid-row: 2; margin: 2px 0 3px; color: var(--muted); }
+    .summary, .plus { grid-column: 2 / -1; }
+    .summary { color: var(--muted); }
     .now { display: inline-flex; align-items: center; gap: 3px; color: var(--fg); }
     .now::before { content: ""; width: 4px; height: 4px; border-radius: 50%; background: #16a34a; }
-    .role-card h3 { font-size: 11pt; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 2px; }
-    .role-card > p { color: var(--muted); }
     .plus { list-style: none; padding: 0; margin-top: 4px; }
     .plus li { display: flex; gap: 6px; padding: 1.5px 0; color: var(--muted); font-size: 8.25pt; line-height: 1.4; }
     .plus li::before { content: "+"; color: var(--fg); font-weight: 500; }
@@ -88,103 +96,93 @@
     .items .small { display: inline-block; margin-top: 1px; font-size: 8pt; line-height: 1.4; color: var(--muted); }
 
     /* Footer band, like the site footer */
-    .foot { display: flex; justify-content: space-between; align-items: baseline; padding: .14in var(--pad); margin-top: .2in; }
-    .foot .mark { font-size: 11pt; font-weight: 500; letter-spacing: -.03em; }
-    .foot .caption { color: var(--muted); }
+    .foot { padding: .14in var(--pad); margin-top: .2in; align-items: baseline; }
+    .foot .mark { grid-column: 1 / span 8; font-size: 11pt; font-weight: 500; letter-spacing: -.03em; }
+    .foot .caption { grid-column: 9 / -1; color: var(--muted); }
   </style>
 </head>
 <body>
   <article class="page">
-    <header class="masthead dark">
-      <div class="top caption">
-        <span>Curriculum vitae</span>
-        <span>Ottawa–Gatineau</span>
-        <span>English &amp; French</span>
-        <span>WCAG accessibility</span>
-      </div>
+    <header class="masthead grid dark">
+      <p class="top caption main">Curriculum vitae</p>
+      <p class="top caption side">Ottawa–Gatineau · English &amp; French</p>
       <h1 class="name">Ian Bédard</h1>
       <p class="role">Web Administrator building accessible, data-driven web applications.</p>
       <dl class="contact">
         <div><dt class="caption">Email</dt><dd><a href="mailto:ian.bedard@hotmail.com">ian.bedard@hotmail.com</a></dd></div>
         <div><dt class="caption">Website</dt><dd><a href="https://ianbedard.com">ianbedard.com</a></dd></div>
-        <div><dt class="caption">LinkedIn</dt><dd><a href="https://www.linkedin.com/in/ianbedard/">in/ianbedard</a></dd></div>
+        <div><dt class="caption">LinkedIn</dt><dd><a href="https://www.linkedin.com/in/ianbedard/">linkedin.com/in/ianbedard</a></dd></div>
         <div><dt class="caption">GitHub</dt><dd><a href="https://github.com/IanBedard">github.com/IanBedard</a></dd></div>
       </dl>
     </header>
 
-    <main class="body light">
-      <div>
+    <main class="body grid light">
+      <div class="main">
         <section class="section">
           <h2 class="eyebrow caption"><span class="index">(01)</span>Experience</h2>
           <ol class="jobs">
             <li class="job">
               <div class="year" aria-hidden="true">2026</div>
-              <div class="role-card">
-                <p class="meta caption"><span>Jul 2026 – Sep 2026</span><span>Public Services and Procurement Canada</span></p>
-                <h3>Senior Web Developer</h3>
-                <p>Led and coordinated a large-scale web initiative with developers, clients and stakeholders, from approved designs through release.</p>
-                <ul class="plus">
-                  <li>Coordinated delivery of a project spanning 500+ Jira subtasks and 1,600 source files, assigning and prioritizing work, reviewing deliverables and maintaining quality standards.</li>
-                  <li>Guided clients and stakeholders through iterative Figma design reviews to validate requirements and deliver production-ready interfaces.</li>
-                </ul>
-              </div>
+              <h3 class="title">Senior Web Developer</h3>
+              <p class="when caption">Jul 2026 – Sep 2026</p>
+              <p class="org caption">Public Services and Procurement Canada</p>
+              <p class="summary">Led and coordinated a large-scale web initiative with developers, clients and stakeholders, from approved designs through release.</p>
+              <ul class="plus">
+                <li>Coordinated delivery of a project spanning 500+ Jira subtasks and 1,600 source files, assigning and prioritizing work, reviewing deliverables and maintaining quality standards.</li>
+                <li>Guided clients and stakeholders through iterative Figma design reviews to validate requirements and deliver production-ready interfaces.</li>
+              </ul>
             </li>
             <li class="job">
               <div class="year" aria-hidden="true">2022</div>
-              <div class="role-card">
-                <p class="meta caption"><span>Nov 2022 – Mar 2023</span><span>Public Services and Procurement Canada</span></p>
-                <h3>Graphic Designer</h3>
-                <p>Produced accessible interactive forms, graphics and internal digital documents.</p>
-              </div>
+              <h3 class="title">Graphic Designer</h3>
+              <p class="when caption">Nov 2022 – Mar 2023</p>
+              <p class="org caption">Public Services and Procurement Canada</p>
+              <p class="summary">Produced accessible interactive forms, graphics and internal digital documents.</p>
             </li>
             <li class="job current">
               <div class="year" aria-hidden="true">2021</div>
-              <div class="role-card">
-                <p class="meta caption"><span>Mar 2021 – <span class="now">Present</span></span><span>Public Services and Procurement Canada</span></p>
-                <h3>Web Administrator</h3>
-                <p>Build and maintain accessible, component-based web applications and automated content workflows for Government of Canada services.</p>
-                <ul class="plus">
-                  <li>Build responsive front ends with React, JavaScript, HTML, CSS and GC Design System components.</li>
-                  <li>Refactor legacy jQuery into reusable React components and modular JavaScript while maintaining WCAG 2.1 conformance.</li>
-                  <li>Develop accessible, searchable data tables and automated JSON transformation workflows for high-volume content.</li>
-                  <li>Translate client requirements into technical specifications, acceptance criteria and accessibility test scenarios.</li>
-                  <li>Ship release-ready code through Git, Bitbucket, Jira, peer review and Agile delivery practices.</li>
-                </ul>
-              </div>
+              <h3 class="title">Web Administrator</h3>
+              <p class="when caption">Mar 2021 – <span class="now">Present</span></p>
+              <p class="org caption">Public Services and Procurement Canada</p>
+              <p class="summary">Build and maintain accessible, component-based web applications and automated content workflows for Government of Canada services.</p>
+              <ul class="plus">
+                <li>Build responsive front ends with React, JavaScript, HTML, CSS and GC Design System components.</li>
+                <li>Refactor legacy jQuery into reusable React components and modular JavaScript while maintaining WCAG 2.1 conformance.</li>
+                <li>Develop accessible, searchable data tables and automated JSON transformation workflows for high-volume content.</li>
+                <li>Translate client requirements into technical specifications, acceptance criteria and accessibility test scenarios.</li>
+                <li>Ship release-ready code through Git, Bitbucket, Jira, peer review and Agile delivery practices.</li>
+              </ul>
             </li>
             <li class="job">
               <div class="year" aria-hidden="true">2020</div>
-              <div class="role-card">
-                <p class="meta caption"><span>Jan 2020 – Mar 2021</span><span>Public Services and Procurement Canada</span></p>
-                <h3>Web Developer</h3>
-                <p>Developed publishing and accessibility tooling for internal web content workflows.</p>
-                <ul class="plus">
-                  <li>Automated content workflows for accessibility verification and publishing preparation.</li>
-                  <li>Delivered work through CI/CD pipelines, Bitbucket and Agile team workflows.</li>
-                </ul>
-              </div>
+              <h3 class="title">Web Developer</h3>
+              <p class="when caption">Jan 2020 – Mar 2021</p>
+              <p class="org caption">Public Services and Procurement Canada</p>
+              <p class="summary">Developed publishing and accessibility tooling for internal web content workflows.</p>
+              <ul class="plus">
+                <li>Automated content workflows for accessibility verification and publishing preparation.</li>
+                <li>Delivered work through CI/CD pipelines, Bitbucket and Agile team workflows.</li>
+              </ul>
             </li>
             <li class="job">
               <div class="year" aria-hidden="true">2019</div>
-              <div class="role-card">
-                <p class="meta caption"><span>Jun 2019 – Aug 2019</span><span>Canadian Radio-television and Telecommunications Commission</span></p>
-                <h3>Web Developer</h3>
-                <p>Supported accessible web publishing and digital content delivery in a federal environment.</p>
-              </div>
+              <h3 class="title">Web Developer</h3>
+              <p class="when caption">Jun 2019 – Aug 2019</p>
+              <p class="org caption">Canadian Radio-television and Telecommunications Commission</p>
+              <p class="summary">Supported accessible web publishing and digital content delivery in a federal environment.</p>
             </li>
             <li class="job">
               <div class="year" aria-hidden="true">2017</div>
-              <div class="role-card">
-                <p class="meta caption"><span>Sep 2017 – Dec 2017</span><span>Freelance</span></p>
-                <h3>WordPress Developer</h3>
-                <p>Delivered WordPress updates for small-business clients, including deniselevesque.ca.</p>
-              </div>
+              <h3 class="title">WordPress Developer</h3>
+              <p class="when caption">Sep 2017 – Dec 2017</p>
+              <p class="org caption">Freelance</p>
+              <p class="summary">Delivered WordPress updates for small-business clients, including deniselevesque.ca.</p>
             </li>
           </ol>
         </section>
       </div>
 
-      <aside>
+      <aside class="side">
         <section class="section">
           <h2 class="eyebrow caption"><span class="index">(02)</span>Toolkit</h2>
           <ul class="items">
@@ -216,7 +214,7 @@
       </aside>
     </main>
 
-    <footer class="foot dark">
+    <footer class="foot grid dark">
       <span class="mark">Ian Bédard</span>
       <span class="caption">ianbedard.com · ian.bedard@hotmail.com</span>
     </footer>
