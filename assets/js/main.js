@@ -270,6 +270,224 @@
   }
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Home and About intros: white wavy lines, like the logo, drifting slowly behind the heading.
+  // Faint on the left where the text sits, brighter to the right; one still frame for reduced motion.
+  var hero = document.querySelector(".hero, .about-hero");
+  if (hero) {
+    var waves = document.createElement("canvas");
+    waves.className = "hero-waves";
+    waves.setAttribute("aria-hidden", "true");
+    hero.insertBefore(waves, hero.firstChild);
+    var wctx = waves.getContext("2d");
+    var LINES = 14, ww, wh, wavesLive = true;
+    // Mouse hover: the lines part around the pointer, easing in on enter and settling back on leave
+    var hx = 0, hy = 0, hxTarget = 0, hyTarget = 0, push = 0, pushTarget = 0;
+    hero.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse") return;
+      var box = hero.getBoundingClientRect();
+      hxTarget = e.clientX - box.left; hyTarget = e.clientY - box.top;
+      if (!pushTarget) { hx = hxTarget; hy = hyTarget; }
+      pushTarget = 1;
+    });
+    hero.addEventListener("pointerleave", function () { pushTarget = 0; });
+    var sizeWaves = function () {
+      var ratio = Math.min(window.devicePixelRatio || 1, 2);
+      ww = hero.offsetWidth; wh = hero.offsetHeight;
+      waves.width = Math.round(ww * ratio); waves.height = Math.round(wh * ratio);
+      wctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+    };
+    var drawWaves = function (ms) {
+      var t = (ms || 0) / 1000, amp = Math.min(wh * .045, 36), k = Math.PI * 2 / Math.max(ww, 600);
+      var fade = wctx.createLinearGradient(0, 0, ww, 0);
+      fade.addColorStop(0, "rgba(240, 240, 240, .04)");
+      fade.addColorStop(.55, "rgba(240, 240, 240, .14)");
+      fade.addColorStop(1, "rgba(240, 240, 240, .3)");
+      // One line in the accent colour, rgb(255, 25, 100)
+      var accent = wctx.createLinearGradient(0, 0, ww, 0);
+      accent.addColorStop(0, "rgba(255, 25, 100, .1)");
+      accent.addColorStop(.55, "rgba(255, 25, 100, .4)");
+      accent.addColorStop(1, "rgba(255, 25, 100, .75)");
+      hx += (hxTarget - hx) * .12; hy += (hyTarget - hy) * .12;
+      push += (pushTarget - push) * .06;
+      var reach = Math.min(ww * .12, 150), lift = Math.min(wh * .06, 44);
+      wctx.clearRect(0, 0, ww, wh);
+      wctx.lineWidth = 1.25;
+      wctx.lineCap = "round";
+      for (var i = 0; i < LINES; i++) {
+        var base = wh * (.08 + .86 * i / (LINES - 1));
+        wctx.strokeStyle = i === LINES - 4 ? accent : fade;
+        wctx.beginPath();
+        for (var x = 0; x <= ww + 8; x += 8) {
+          // Two slow waves travelling in opposite directions; neighbouring lines are slightly out of phase
+          var y = base + amp * (.65 * Math.sin(x * k * 1.1 + t * .35 + i * .32) + .35 * Math.sin(x * k * 2.3 - t * .22 + i * .55));
+          if (push > .001) {
+            // Bend away from the pointer: strongest right under it, fading out sideways and between lines
+            var dx = (x - hx) / reach, dy = (y - hy) / (reach * .8);
+            y += (dy < 0 ? -1 : 1) * lift * push * Math.exp(-dx * dx - dy * dy) * Math.min(1, Math.abs(dy) * 4 + .15);
+          }
+          if (x) wctx.lineTo(x, y); else wctx.moveTo(x, y);
+        }
+        wctx.stroke();
+      }
+    };
+    var loopWaves = function (ms) {
+      drawWaves(ms);
+      if (wavesLive) requestAnimationFrame(loopWaves);
+    };
+    sizeWaves();
+    window.addEventListener("resize", function () { sizeWaves(); drawWaves(performance.now()); });
+    if (reduceMotion) drawWaves(0);
+    else {
+      requestAnimationFrame(loopWaves);
+      // Only animate while the intro is on screen
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          var was = wavesLive;
+          wavesLive = entries[0].isIntersecting;
+          if (wavesLive && !was) requestAnimationFrame(loopWaves);
+        }).observe(hero);
+      }
+    }
+  }
+
+  // Home intro: a voxel maple leaf turning slowly on the right, in the accent colour.
+  // The outline comes from the leaf on the flag of Canada, two cubes thick. It leans towards the pointer,
+  // and the cubes near the cursor are pushed aside. One still frame for reduced motion. Home page only.
+  if (hero && hero.classList.contains("hero")) {
+    var LEAF = [
+      ".............#", ".............#", "............###", "............###",
+      "........#..#####..#", "........###########", "........###########", "........###########",
+      ".........#########", ".....#...#########...#", "#...###..#########..###...#", "########.#########.########",
+      "###########################", ".#########################", ".#########################", "###########################",
+      "###########################", ".#########################", "..#######################", "....###################",
+      ".....#################", "......###############", ".......#############", "......###############",
+      "......#......#......#", ".............#", ".............#", ".............#",
+      ".............#", ".............#", ".............#"
+    ];
+    var leaf = document.createElement("canvas");
+    leaf.className = "hero-leaf";
+    leaf.setAttribute("aria-hidden", "true");
+    hero.insertBefore(leaf, waves.nextSibling);
+    var lctx = leaf.getContext("2d");
+
+    // Six face directions; each cube keeps only the faces that touch empty space
+    var DIRS = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
+    var filled = function (c, r) { return !!(LEAF[r] && LEAF[r].charAt(c) === "#"); };
+    var voxels = [];
+    LEAF.forEach(function (row, r) {
+      for (var c = 0; c < row.length; c++) {
+        if (row.charAt(c) !== "#") continue;
+        for (var z = 0; z < 2; z++) {
+          var faces = [];
+          DIRS.forEach(function (d, f) {
+            var hidden = d[2] ? (z + d[2] === 0 || z + d[2] === 1) : filled(c + d[0], r + d[1]);
+            if (!hidden) faces.push(f);
+          });
+          voxels.push({ x: c - 13, y: r - 15, z: z - .5, faces: faces });
+        }
+      }
+    });
+
+    var lw, lh, unit, lcx, lcy, leafLive = true;
+    var lmx = .5, lmy = .5, lmxT = .5, lmyT = .5, lpx = 0, lpy = 0, lpxT = 0, lpyT = 0, scatter = 0, scatterT = 0;
+    var LIGHT = [-.35, -.55, .76];
+    var sizeLeaf = function () {
+      var ratio = Math.min(window.devicePixelRatio || 1, 2), narrow = hero.offsetWidth < 860;
+      lw = hero.offsetWidth; lh = hero.offsetHeight;
+      leaf.width = Math.round(lw * ratio); leaf.height = Math.round(lh * ratio);
+      lctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+      unit = Math.min(lh * .476, lw * (narrow ? .64 : .255)) / 31;
+      lcx = lw * (narrow ? .5 : .8); lcy = lh * (narrow ? .47 : .42);
+    };
+    hero.addEventListener("pointermove", function (e) {
+      if (e.pointerType !== "mouse") return;
+      var box = hero.getBoundingClientRect();
+      lpxT = e.clientX - box.left; lpyT = e.clientY - box.top;
+      if (!scatterT) { lpx = lpxT; lpy = lpyT; }
+      lmxT = lpxT / lw; lmyT = lpyT / lh; scatterT = 1;
+    });
+    hero.addEventListener("pointerleave", function () { lmxT = lmyT = .5; scatterT = 0; });
+
+    var drawLeaf = function (ms) {
+      var t = (ms || 0) / 1000;
+      lmx += (lmxT - lmx) * .05; lmy += (lmyT - lmy) * .05;
+      lpx += (lpxT - lpx) * .15; lpy += (lpyT - lpy) * .15;
+      scatter += (scatterT - scatter) * .07;
+      // Turn slowly about the vertical axis; the pointer adds yaw and pitch
+      var yaw = t * .35 + (lmx - .5) * 1.4, pitch = .15 - (lmy - .5) * 1.1;
+      var cyw = Math.cos(yaw), syw = Math.sin(yaw), cp = Math.cos(pitch), sp = Math.sin(pitch);
+      var rot = function (v) {
+        var x = v[0] * cyw + v[2] * syw, z = -v[0] * syw + v[2] * cyw;
+        return [x, v[1] * cp - z * sp, v[1] * sp + z * cp];
+      };
+      var axes = [rot([1, 0, 0]), rot([0, 1, 0]), rot([0, 0, 1])];
+      // Per face direction: its normal on screen, whether it faces us, and its shade
+      var looks = DIRS.map(function (d, f) {
+        var a = axes[f >> 1], s = d[0] + d[1] + d[2];
+        var n = [a[0] * s, a[1] * s, a[2] * s];
+        var light = Math.max(0, n[0] * LIGHT[0] + n[1] * LIGHT[1] + n[2] * LIGHT[2]);
+        var k = .38 + .62 * light;
+        return { n: n, show: n[2] > .01, u: axes[(f >> 1) === 0 ? 1 : 0], v: axes[(f >> 1) === 2 ? 1 : 2],
+          fill: "rgb(" + Math.round(255 * k) + "," + Math.round(25 * k) + "," + Math.round(100 * k) + ")" };
+      });
+      var bob = Math.sin(t * .8) * unit * .8, h = unit / 2, reach = unit * 7;
+      voxels.forEach(function (p) {
+        p.depth = p.x * axes[0][2] + p.y * axes[1][2] + p.z * axes[2][2];
+        var sx = lcx + (p.x * axes[0][0] + p.y * axes[1][0] + p.z * axes[2][0]) * unit;
+        var sy = lcy + bob + (p.x * axes[0][1] + p.y * axes[1][1] + p.z * axes[2][1]) * unit;
+        if (scatter > .001) {
+          // Push cubes away from the cursor, strongest right under it
+          var dx = sx - lpx, dy = sy - lpy, dist = Math.sqrt(dx * dx + dy * dy) + .001;
+          var f = scatter * Math.exp(-dist * dist / (reach * reach)) * unit * 2.4;
+          sx += dx / dist * f; sy += dy / dist * f;
+          p.depth += f / unit;
+        }
+        p.sx = sx; p.sy = sy;
+      });
+      voxels.sort(function (a, b) { return a.depth - b.depth; });
+
+      lctx.clearRect(0, 0, lw, lh);
+      lctx.lineWidth = .6;
+      lctx.strokeStyle = "rgba(15, 15, 15, .45)";
+      lctx.lineJoin = "round";
+      voxels.forEach(function (p) {
+        for (var i = 0; i < p.faces.length; i++) {
+          var L = looks[p.faces[i]];
+          if (!L.show) continue;
+          var fx = p.sx + L.n[0] * h, fy = p.sy + L.n[1] * h;
+          var ux = L.u[0] * h, uy = L.u[1] * h, vx = L.v[0] * h, vy = L.v[1] * h;
+          lctx.beginPath();
+          lctx.moveTo(fx + ux + vx, fy + uy + vy);
+          lctx.lineTo(fx + ux - vx, fy + uy - vy);
+          lctx.lineTo(fx - ux - vx, fy - uy - vy);
+          lctx.lineTo(fx - ux + vx, fy - uy + vy);
+          lctx.closePath();
+          lctx.fillStyle = L.fill;
+          lctx.fill();
+          lctx.stroke();
+        }
+      });
+    };
+    var loopLeaf = function (ms) {
+      drawLeaf(ms);
+      if (leafLive) requestAnimationFrame(loopLeaf);
+    };
+    sizeLeaf();
+    window.addEventListener("resize", function () { sizeLeaf(); drawLeaf(reduceMotion ? 0 : performance.now()); });
+    if (reduceMotion) drawLeaf(0);
+    else {
+      requestAnimationFrame(loopLeaf);
+      // Only animate while the intro is on screen
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          var was = leafLive;
+          leafLive = entries[0].isIntersecting;
+          if (leafLive && !was) requestAnimationFrame(loopLeaf);
+        }).observe(hero);
+      }
+    }
+  }
   var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   // Smooth wheel scrolling: the page eases towards where the wheel says it should be.
@@ -355,90 +573,90 @@
     paint();
   }
 
-  // About page toolkit: every tool sits on a slowly turning globe, tied to the hub by a hairline.
-  // Nearer tags are larger and brighter; the pointer tilts the globe and nudges the hub.
-  // Without JS the tools stay a plain list; with reduced motion the globe doesn't spin on its own.
+  // About page toolkit: every tool sits on a faint panel inside a 3D lattice, like words pinned to the walls of a set of rooms.
+  // As the section scrolls by, the camera swings from a near-flat view into a tilted one; the pointer leans it further.
+  // Panels further away fade out. Without JS the tools stay a plain list; with reduced motion the lattice holds still.
   var kit = document.querySelector(".toolkit");
   if (kit) {
-    var globe = kit.querySelector(".toolkit-globe");
-    var NS = "http://www.w3.org/2000/svg";
-    var svg = document.createElementNS(NS, "svg");
-    var wires = [0, 1, 2, 3, 4].map(function () {
-      var el = document.createElementNS(NS, "ellipse");
-      el.setAttribute("class", "wire");
-      svg.appendChild(el);
-      return el;
-    });
-    var tags = [];
+    var field = kit.querySelector(".toolkit-globe");
+    var world = document.createElement("div");
+    world.className = "tk-world";
+    var words = [];
     kit.querySelectorAll(".toolkit-list > li").forEach(function (group) {
-      tags.push({ text: group.querySelector("h3").textContent, group: true });
-      group.querySelectorAll("li").forEach(function (li) { tags.push({ text: li.textContent }); });
+      words.push({ text: group.querySelector("h3").textContent, group: true });
+      group.querySelectorAll("li").forEach(function (li) { words.push({ text: li.textContent }); });
     });
-    var golden = Math.PI * (3 - Math.sqrt(5));
-    tags.forEach(function (t, i) {
-      // Spread the tags evenly over the sphere (Fibonacci lattice)
-      var y = 1 - 2 * (i + .5) / tags.length, r = Math.sqrt(1 - y * y), a = i * golden;
-      t.x = Math.cos(a) * r; t.y = y; t.z = Math.sin(a) * r;
-      t.ray = document.createElementNS(NS, "line");
-      t.ray.setAttribute("class", "ray");
-      svg.appendChild(t.ray);
-      t.el = document.createElement("span");
-      t.el.className = "tag" + (t.group ? " is-group" : "");
-      t.el.textContent = t.text;
+    // Every cell of a 5 × 3 × 4 lattice, shuffled with a fixed seed so the layout is the same on every visit
+    var seed = 11, cells = [];
+    var rand = function () { seed = seed * 16807 % 2147483647; return (seed - 1) / 2147483646; };
+    for (var gx = -2; gx <= 2; gx++) for (var gy = -1; gy <= 1; gy++) for (var gz = -2; gz <= 1; gz++) cells.push([gx, gy, gz]);
+    for (var ci = cells.length - 1; ci > 0; ci--) { var cj = Math.floor(rand() * (ci + 1)), swap = cells[ci]; cells[ci] = cells[cj]; cells[cj] = swap; }
+    words.forEach(function (w, i) {
+      w.cell = cells[i % cells.length];
+      // Most panels face the viewer; some stand side-on like walls, a few lie flat like floors
+      var r = rand();
+      w.turn = r < .55 ? "" : r < .85 ? " rotateY(90deg)" : " rotateX(-90deg)";
+      w.el = document.createElement("span");
+      w.el.className = "tk-word" + (w.group ? " is-group" : "");
+      w.el.textContent = w.text;
+      world.appendChild(w.el);
     });
-    globe.appendChild(svg);
-    tags.forEach(function (t) { globe.appendChild(t.el); });
+    field.appendChild(world);
     kit.classList.add("has-globe");
 
-    var W, H, R, FLAT = .66, spin = 0, px = 0, py = 0, tx = 0, ty = 0, live = false;
-    var measure = function () {
-      W = globe.offsetWidth; H = globe.offsetHeight;
-      R = Math.min(W * (W < 640 ? .34 : .25), H * .5, 380);
-      tags.forEach(function (t) { t.w = t.el.offsetWidth; t.h = t.el.offsetHeight; });
-    };
-    var draw = function () {
-      px += (tx - px) * .06; py += (ty - py) * .06;
-      if (!reduceMotion) spin += .0022 + px * .004;
-      var gx = W / 2, gy = H / 2, hx = gx + px * 48, hy = gy + py * 32;
-      var tilt = -.3 + py * .35, ct = Math.cos(tilt), st = Math.sin(tilt), cs = Math.cos(spin), ss = Math.sin(spin);
-      tags.forEach(function (t) {
-        var x = t.x * cs + t.z * ss, z = t.z * cs - t.x * ss;
-        var y = t.y * ct - z * st;
-        z = t.y * st + z * ct;
-        var d = (z + 1) / 2, k = .7 + d * .45;
-        var sx = gx + x * R, sy = gy + y * R * FLAT;
-        t.el.style.transform = "translate(" + (sx - t.w * k / 2).toFixed(1) + "px," + (sy - t.h * k / 2).toFixed(1) + "px) scale(" + k.toFixed(3) + ")";
-        t.el.style.opacity = (.18 + d * .82).toFixed(3);
-        t.el.style.zIndex = Math.round(d * 100);
-        t.ray.setAttribute("x1", hx.toFixed(1)); t.ray.setAttribute("y1", hy.toFixed(1));
-        t.ray.setAttribute("x2", sx.toFixed(1)); t.ray.setAttribute("y2", sy.toFixed(1));
-        t.ray.style.opacity = (.04 + d * .26).toFixed(3);
+    var C, live = false, px = 0, py = 0, tx = 0, ty = 0;
+    var layout = function () {
+      C = Math.min(field.offsetWidth / 4, field.offsetHeight / 2.4, 260);
+      field.style.setProperty("--c", C.toFixed(1) + "px");
+      words.forEach(function (w) {
+        w.x = w.cell[0] * C; w.y = w.cell[1] * C * .8; w.z = w.cell[2] * C;
+        w.el.style.transform = "translate(-50%, -50%) translate3d(" + w.x.toFixed(1) + "px," + w.y.toFixed(1) + "px," + w.z.toFixed(1) + "px)" + w.turn;
       });
-      // Wireframe: the outline, the equator, and three meridians turning with the globe
-      var shapes = [[R, R * FLAT], [R, R * FLAT * Math.abs(st)]];
-      for (var m = 0; m < 3; m++) shapes.push([R * Math.abs(Math.cos(spin + m * Math.PI / 3)), R * FLAT]);
-      wires.forEach(function (el, i) {
-        el.setAttribute("cx", gx); el.setAttribute("cy", gy);
-        el.setAttribute("rx", shapes[i][0].toFixed(1)); el.setAttribute("ry", shapes[i][1].toFixed(1));
+    };
+    // How far the section has travelled through the window, 0 as it enters and 1 as it leaves
+    var progress = function () {
+      var box = field.getBoundingClientRect();
+      return Math.max(0, Math.min(1, (window.innerHeight - box.top) / (window.innerHeight + box.height)));
+    };
+    var rad = Math.PI / 180;
+    var draw = function (ms) {
+      var t = (ms || 0) / 1000, p = reduceMotion ? .6 : progress();
+      px += (tx - px) * .06; py += (ty - py) * .06;
+      var k = p * p * (3 - 2 * p);
+      var drift = reduceMotion ? 0 : 1;
+      var ax = 8 + 26 * k - py * 10 + drift * Math.sin(t * .2) * 2;
+      var ay = -12 - 30 * k + px * 16 + drift * Math.sin(t * .13) * 4;
+      var az = -10 * k;
+      world.style.transform = "rotateX(" + ax.toFixed(2) + "deg) rotateY(" + ay.toFixed(2) + "deg) rotateZ(" + az.toFixed(2) + "deg)";
+      // Depth of each panel after the same rotations (CSS applies rotateZ first, then Y, then X)
+      var cx = Math.cos(ax * rad), sx = Math.sin(ax * rad), cy = Math.cos(ay * rad), sy = Math.sin(ay * rad), cz = Math.cos(az * rad), sz = Math.sin(az * rad);
+      words.forEach(function (w) {
+        var x1 = w.x * cz - w.y * sz, y1 = w.x * sz + w.y * cz;
+        var z2 = -x1 * sy + w.z * cy;
+        var z3 = y1 * sx + z2 * cx;
+        var d = Math.max(0, Math.min(1, (z3 + C * 2.4) / (C * 4.8)));
+        w.el.style.opacity = (.08 + d * .92).toFixed(3);
       });
       if (live) requestAnimationFrame(draw);
     };
-    measure();
-    draw();
-    window.addEventListener("resize", function () { measure(); draw(); });
-    kit.addEventListener("pointermove", function (e) {
-      var box = globe.getBoundingClientRect();
-      tx = Math.max(-1, Math.min(1, (e.clientX - box.left) / box.width * 2 - 1));
-      ty = Math.max(-1, Math.min(1, (e.clientY - box.top) / box.height * 2 - 1));
-    });
-    kit.addEventListener("pointerleave", function () { tx = ty = 0; });
-    // Only animate while the globe is on screen
-    if ("IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) {
-        var was = live;
-        live = entries[0].isIntersecting;
-        if (live && !was) requestAnimationFrame(draw);
-      }).observe(globe);
+    layout();
+    draw(0);
+    window.addEventListener("resize", function () { layout(); draw(0); });
+    if (!reduceMotion) {
+      kit.addEventListener("pointermove", function (e) {
+        var box = field.getBoundingClientRect();
+        tx = Math.max(-1, Math.min(1, (e.clientX - box.left) / box.width * 2 - 1));
+        ty = Math.max(-1, Math.min(1, (e.clientY - box.top) / box.height * 2 - 1));
+      });
+      kit.addEventListener("pointerleave", function () { tx = ty = 0; });
+      // Only animate while the lattice is on screen
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(function (entries) {
+          var was = live;
+          live = entries[0].isIntersecting;
+          if (live && !was) requestAnimationFrame(draw);
+        }).observe(field);
+      }
     }
   }
 

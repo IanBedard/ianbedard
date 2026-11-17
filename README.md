@@ -1,6 +1,6 @@
 # Hi, I'm Ian Bédard 👋
 
-Web developer in Ottawa–Gatineau. I build bilingual (English/French), accessible websites and Shopify stores for small businesses.
+Web developer in Ottawa–Gatineau. I build bilingual (English/French), accessible websites for small businesses.
 
 - 🏛️ 5+ years building Government of Canada websites, where quality, security and accessibility are non-negotiable
 - 🌐 Every site in both official languages, done properly
@@ -20,7 +20,7 @@ A static site in plain HTML, CSS and JavaScript, with no build step. Every page 
 | Case studies | `work/*.html` | `fr/realisations/*.html` |
 
 - `assets/css/style.css`: the whole design (monochrome editorial layout, one typeface, 12-column grid). Spacing follows the window height as well as its width, so each section fits on screen after an anchor jump.
-- `assets/js/main.js`: small enhancements; the site works without it. Mobile menu, contact form, scroll reveals, the scroll scenes on the home page, the About page timeline and the toolkit globe.
+- `assets/js/main.js`: small enhancements; the site works without it. Mobile menu, contact form, scroll reveals, the scroll scenes on the home page, the About page timeline and the toolkit lattice.
 - `assets/docs/`: the CV and the case-study PDFs linked from the About page.
 - `tools/`: Python scripts that generate the logo and favicon (`build_logo.py`), the case-study pages (`build_case_studies.py`), the mockup images (`build_mockups.py`) and the CV PDF (`build_cv.py`, which prints `tools/cv/cv.html` with headless Chrome or Edge).
 
