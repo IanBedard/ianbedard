@@ -143,6 +143,9 @@ section[id] { scroll-margin-top: calc(1.5rem - var(--section)); }
   transition: background-size .4s var(--ease);
 }
 .site-nav a:hover { background-size: 100% 1px; }
+/* About stands out from the other links: bold, with an accent dot */
+.site-nav .nav-about { display: inline-flex; align-items: center; gap: .45em; font-weight: 700; }
+.site-nav .nav-about::before { content: ""; width: .5em; height: .5em; border-radius: 50%; background: var(--accent); flex: none; }
 .site-nav .lang-switch { color: rgba(240, 240, 240, .62); }
 .site-nav .lang-switch:hover { color: var(--paper); }
 .site-nav .nav-cta { border: 1px solid rgba(240, 240, 240, .4); padding: .5rem .9rem; background: none; transition: background .3s var(--ease), color .3s var(--ease); }
