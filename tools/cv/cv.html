@@ -75,6 +75,12 @@
     .job:first-child { border-top: 0; padding-top: 0; }
     .year { grid-column: 1; grid-row: 1 / span 2; font-size: 15pt; font-weight: 500; line-height: .85; letter-spacing: -.05em; color: var(--dim); }
     .job.current .year { color: var(--fg); }
+    .acting { font-size: 8.5pt; letter-spacing: 0; color: var(--muted); }
+    /* The acting and assigned roles sat inside the Web Administrator position: a bracket in the left margin spans them */
+    .span-group { position: relative; }
+    .span-group::before { content: ""; position: absolute; left: -14px; top: 1px; bottom: 9px; width: 2px; border-radius: 1px; background: #16a34a; }
+    .span-label { position: absolute; left: -17px; top: 50%; transform: translate(-100%, -50%) rotate(-90deg); transform-origin: 100% 50%; white-space: nowrap; font-size: 5.5pt; color: var(--muted); }
+    .span-group + .job { border-top: 1px solid var(--line); }
     .title { grid-column: 2 / span 4; grid-row: 1; font-size: 11pt; letter-spacing: -.02em; line-height: 1.1; }
     .when { grid-column: 6 / -1; grid-row: 1; text-align: right; color: var(--muted); }
     .org { grid-column: 2 / -1; grid-row: 2; margin: 2px 0 3px; color: var(--muted); }
@@ -121,9 +127,12 @@
         <section class="section">
           <h2 class="eyebrow caption"><span class="index">(01)</span>Experience</h2>
           <ol class="jobs">
+            <li class="span-group">
+              <p class="span-label caption">Web Administrator · Mar 2021 – Present</p>
+              <ol class="jobs">
             <li class="job">
               <div class="year" aria-hidden="true">2026</div>
-              <h3 class="title">Senior Web Developer</h3>
+              <h3 class="title">Senior Web Developer <span class="acting">(acting)</span></h3>
               <p class="when caption">Jul 2026 – Sep 2026</p>
               <p class="org caption">Public Services and Procurement Canada</p>
               <p class="summary">Led and coordinated a large-scale web initiative with developers, clients and stakeholders, from approved designs through release.</p>
@@ -152,6 +161,8 @@
                 <li>Translate client requirements into technical specifications, acceptance criteria and accessibility test scenarios.</li>
                 <li>Ship release-ready code through Git, Bitbucket, Jira, peer review and Agile delivery practices.</li>
               </ul>
+            </li>
+              </ol>
             </li>
             <li class="job">
               <div class="year" aria-hidden="true">2020</div>

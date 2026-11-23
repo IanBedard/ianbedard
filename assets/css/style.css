@@ -686,6 +686,14 @@ select.input option { background: var(--ink); color: var(--paper); }
 .tl-now::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #16a34a; }
 .tl-card h3 { font-size: clamp(1.75rem, 3.2vw, 3rem); letter-spacing: -.04em; line-height: 1; margin-bottom: 1rem; }
 .tl-card > p { margin: 0; color: var(--muted); max-width: 56ch; }
+.tl-acting { font-size: .4em; letter-spacing: 0; color: var(--muted); vertical-align: middle; white-space: nowrap; }
+/* The acting and assigned roles sat inside the Web Administrator position: a green bracket in the margin spans all three */
+.tl-group { position: relative; padding-bottom: clamp(3.5rem, 7vw, 6rem); }
+.tl-group:last-child { padding-bottom: 0; }
+.tl-group > .tl-list > .tl-item:last-child { padding-bottom: 0; }
+.tl-group::before { content: ""; position: absolute; left: calc(var(--gutter) * -.5 - 1px); top: 2.25rem; bottom: clamp(3.5rem, 7vw, 6rem); width: 2px; border-radius: 1px; background: #16a34a; }
+.tl-group-label { display: flex; align-items: center; gap: .5rem; margin: 0 0 1.25rem calc(var(--gutter) * -.5 - 4px); color: var(--muted); }
+.tl-group-label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #16a34a; flex: none; }
 @media (max-width: 860px) {
   .timeline { --rail: 6px; }
   .tl-item { grid-template-columns: 1fr; padding-left: 2.25rem; row-gap: 1.25rem; }
